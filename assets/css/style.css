@@ -1,13 +1,16 @@
 body {
   height: 90vh;
   width: 100vw;
-  background-color: beige;
-  border: 1px blue solid;
+  /* background-color: beige; */
+  /* border: 1px blue solid; */
+  background-image: url("../images/lfz-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-header, aside, main {
+/* header, aside, main {
   border: 1px black solid;
-}
+} */
 
 header {
   margin-bottom: 10px;
@@ -17,7 +20,7 @@ header {
 .game-area {
   display: flex;
   height: 85%;
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 
 aside {
@@ -43,6 +46,7 @@ main {
   display: flex;
   /* height: 85%; */
   width: 75%;
+
 }
 
 .container {
@@ -56,9 +60,24 @@ main {
   margin: 5px;
   height: 32%;
   width: 15%;
-  background-color: black;
 }
 
-/* .card .back {
-  background-color: black;
-} */
+
+.lfz-card {
+  background-image: url("../images/lfz-card.jpg");
+}
+
+.js-logo {
+  background-image: url("../images/js-logo.png");
+}
+
+.front, .back, .lfz-card {
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
