@@ -54,6 +54,10 @@ function handleCardClick(event) {
   $("#winDiv").on("click", function () {
     hideModal();
   });
+  $("#winDiv").on("click", "#tryAgainDiv", function () {
+    $(".card .back").removeClass("hidden");
+    displayStats(1);
+  });
 }
 
 function calculateAccuracy() {
@@ -65,13 +69,19 @@ function calculateAccuracy() {
   return percentAccuracy;
 }
 
-function displayStats() {
+function displayStats(reset) {
   var aside = $("aside");
   var gamesPlayedElem = aside.find(".games span");
   var attemptsMadeElem = aside.find(".attempts span");
   var accuracyElem = aside.find(".accuracy span");
   var calcAccuracy = calculateAccuracy(); //use to update the text in the accuracy element
 
+  if (reset) {
+    matches = 0;
+    attempts = 0;
+    accuracyElem.text(0+"%");
+    return;
+  }
   if (games_played > 0) {
     gamesPlayedElem.text(games_played);
   }
