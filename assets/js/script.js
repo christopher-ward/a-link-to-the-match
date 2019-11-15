@@ -8,7 +8,30 @@ var attempts = null;
 var games_played = null;
 
 function initializeApp() {
-  $(".card").on("click", handleCardClick);
+  dynamicCardGenerator();
+  $(".container").on("click", ".card", handleCardClick);
+}
+
+function dynamicCardGenerator(reset) {
+  //need to first create array of the different possible faces(fronts) of the cards
+  var cardFaceArray = ["js-logo", "js-logo", "gitHub-logo", "gitHub-logo", "html-logo", "html-logo", "mysql-logo", "mysql-logo", "php-logo", "php-logo", "react-logo", "react-logo", "node-logo", "node-logo", "docker-logo", "docker-logo", "css-logo", "css-logo"];
+  var randCardFaceIndex = null;
+  var randCardFace = null;
+  if (reset) {
+    $(".container").html("");
+  }
+
+  while (cardFaceArray.length > 0) {
+    var divCardElem = $("<div>").addClass("card");
+    var frontDivElem = $("<div>");
+    var backDivElem = $("<div>").addClass("back lfz-card");
+    randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
+    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
+    frontDivElem.addClass("front " + randCardFace);
+    divCardElem.append(frontDivElem);
+    divCardElem.append(backDivElem);
+    $("div .container").append(divCardElem);
+  }
 }
 
 function handleCardClick(event) {
@@ -31,16 +54,16 @@ function handleCardClick(event) {
 
     if (firstClickImage != secondClickImage) {
       attempts++;
-      $(".card").off("click", handleCardClick);
+      $(".container").off("click", ".card", handleCardClick);
       setTimeout(function () { //first arg in setTimeout is anon function with the elements to be hidden
         firstCardClicked.find(".back").removeClass("hidden");
         secondCardClicked.find(".back").removeClass("hidden");
         firstCardClicked = null;
         secondCardClicked = null;
-        $(".card").on("click", handleCardClick);
-      }, 1500);
+        $(".container").on("click", ".card", handleCardClick);
+      }, 500);
+
     } else {
-      console.log("Cards match!");
       matches++;
       if (matches === maxMatches) {
         games_played++;
@@ -55,8 +78,10 @@ function handleCardClick(event) {
     hideModal();
   });
   $("#winDiv").on("click", "#tryAgainDiv", function () {
-    $(".card .back").removeClass("hidden");
     displayStats(1);
+    // $(".card .back").removeClass("hidden");
+    dynamicCardGenerator(1);
+
   });
 }
 
@@ -80,6 +105,7 @@ function displayStats(reset) {
     matches = 0;
     attempts = 0;
     accuracyElem.text(0+"%");
+    attemptsMadeElem.text(attempts);
     return;
   }
   if (games_played > 0) {
