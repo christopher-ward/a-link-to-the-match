@@ -70,6 +70,7 @@ main {
 }
 
 .card {
+  position: relative;
   margin: 5px;
   /* height: 32%; */
   width: 15%;
@@ -86,7 +87,12 @@ main {
   background-image: url("../images/js-logo.png");
 }
 
+.gitHub-logo {
+  background-image: url("../images/gitHub-logo.png");
+}
+
 .front, .back, .lfz-card {
+  position: absolute;
   background-position: center;
   background-size: cover;
   height: 100%;
