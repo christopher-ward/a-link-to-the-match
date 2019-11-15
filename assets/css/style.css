@@ -1,1 +1,64 @@
+body {
+  height: 90vh;
+  width: 100vw;
+  background-color: beige;
+  border: 1px blue solid;
+}
 
+header, aside, main {
+  border: 1px black solid;
+}
+
+header {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.game-area {
+  display: flex;
+  height: 85%;
+  border: 1px red solid;
+}
+
+aside {
+  /* height: 85%; */
+  width: 15%;
+  text-align: center;
+}
+
+
+
+aside .stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin: 5px;
+  background-color: lightblue;
+  height: 10%;
+  /* align-self: center; */
+}
+
+main {
+  display: flex;
+  /* height: 85%; */
+  width: 75%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.card {
+  margin: 5px;
+  height: 32%;
+  width: 15%;
+  background-color: black;
+}
+
+/* .card .back {
+  background-color: black;
+} */
