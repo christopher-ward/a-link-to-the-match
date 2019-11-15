@@ -74,7 +74,7 @@ main {
   margin: 5px;
   /* height: 32%; */
   width: 15%;
-  background-color: black;
+  /* background-color: black; */
   /* height: 97%; */
 }
 
@@ -87,16 +87,67 @@ main {
   background-image: url("../images/js-logo.png");
 }
 
+.css-logo {
+  background-image: url("../images/css-logo.png");
+}
+
+.html-logo {
+  background-image: url("../images/html-logo.png");
+}
+
+.mysql-logo {
+  background-image: url("../images/mysql-logo.jpg");
+}
+
+.docker-logo {
+  background-image: url("../images/docker-logo.jpg");
+}
+
+.node-logo {
+  background-image: url("../images/node-logo.png");
+}
+
+.php-logo {
+  background-image: url("../images/php-logo.jpeg");
+}
+
+.react-logo {
+  background-image: url("../images/react-logo.png");
+}
+
 .gitHub-logo {
   background-image: url("../images/gitHub-logo.png");
 }
 
-.front, .back, .lfz-card {
+.front, .back, .lfz-card, .js-logo, .gitHub-logo, .html-logo, .docker-logo, .css-logo, .mysql-logo, .node-logo, .php-logo, .react-logo {
   position: absolute;
   background-position: center;
   background-size: cover;
   height: 100%;
   width: 100%;
+}
+
+.win-container {
+    width: 50%;
+    height: 50%;
+    background-color: rgb(226, 67, 4);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+
+.try-again {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    border: 1px solid gray;
+    padding: 5px;
+    display: none;
 }
 
 .hidden {
