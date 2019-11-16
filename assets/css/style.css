@@ -125,6 +125,19 @@ main {
   width: 100%;
 }
 
+.start-reveal {
+  display: flex;
+  position: absolute;
+  left: 51.5%;
+  top: 45%;
+  width: 10%;
+  height: 10%;
+  background-color: red;
+  opacity: .5;
+  justify-content: center;
+  align-items: center;
+}
+
 .win-container {
     width: 50%;
     height: 50%;
@@ -132,7 +145,7 @@ main {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-37%,-50%);
     display: none;
 }
 

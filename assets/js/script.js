@@ -10,6 +10,7 @@ var games_played = null;
 function initializeApp() {
   dynamicCardGenerator();
   $(".container").on("click", ".card", handleCardClick);
+  $("#startDiv").on("click", startDivClick);
 }
 
 function dynamicCardGenerator(reset) {
@@ -20,7 +21,6 @@ function dynamicCardGenerator(reset) {
   if (reset) {
     $(".container").html("");
   }
-
   while (cardFaceArray.length > 0) {
     var divCardElem = $("<div>").addClass("card");
     var frontDivElem = $("<div>");
@@ -36,22 +36,18 @@ function dynamicCardGenerator(reset) {
 
 function handleCardClick(event) {
   var currentCard = $(event.currentTarget);
-
   if (currentCard.find(".back").hasClass("hidden")) {
     return;
   }
   currentCard.find(".back").addClass("hidden");
-
   if (firstCardClicked === null) {
     firstCardClicked = currentCard;
   } else {
     secondCardClicked = currentCard;
   }
-
   if (secondCardClicked) {
     var firstClickImage = firstCardClicked.find(".front").css("background-image");
     var secondClickImage = secondCardClicked.find(".front").css("background-image");
-
     if (firstClickImage != secondClickImage) {
       attempts++;
       $(".container").off("click", ".card", handleCardClick);
@@ -62,7 +58,6 @@ function handleCardClick(event) {
         secondCardClicked = null;
         $(".container").on("click", ".card", handleCardClick);
       }, 500);
-
     } else {
       matches++;
       if (matches === maxMatches) {
@@ -81,7 +76,7 @@ function handleCardClick(event) {
     displayStats(1);
     // $(".card .back").removeClass("hidden");
     dynamicCardGenerator(1);
-
+    startDivClick();
   });
 }
 
@@ -100,7 +95,6 @@ function displayStats(reset) {
   var attemptsMadeElem = aside.find(".attempts span");
   var accuracyElem = aside.find(".accuracy span");
   var calcAccuracy = calculateAccuracy(); //use to update the text in the accuracy element
-
   if (reset) {
     matches = 0;
     attempts = 0;
@@ -117,6 +111,13 @@ function displayStats(reset) {
   accuracyElem.text(calcAccuracy);
 }
 
+function startDivClick() {
+  $("#startDiv").addClass("hidden");
+  $(".lfz-card").addClass("hidden");
+  setTimeout(function() {
+    $(".lfz-card").removeClass("hidden");
+  }, 1500);
+}
 function winConditionModal() {
   $("#tryAgainDiv").show();
   $("#winDiv").show();
