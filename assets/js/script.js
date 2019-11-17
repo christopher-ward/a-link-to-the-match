@@ -15,7 +15,7 @@ function initializeApp() {
 
 function dynamicCardGenerator(reset) {
   //need to first create array of the different possible faces(fronts) of the cards
-  var cardFaceArray = ["js-logo", "js-logo", "gitHub-logo", "gitHub-logo", "html-logo", "html-logo", "mysql-logo", "mysql-logo", "php-logo", "php-logo", "react-logo", "react-logo", "node-logo", "node-logo", "docker-logo", "docker-logo", "css-logo", "css-logo"];
+  var cardFaceArray = ["js-logo", "js-logo", "gitHub-logo", "gitHub-logo", "html-logo", "html-logo", "mysql-logo", "mysql-logo", "php-logo", "php-logo", "react-logo", "react-logo", "green-rupee", "green-rupee", "blue-rupee", "blue-rupee", "css-logo", "css-logo"];
   var randCardFaceIndex = null;
   var randCardFace = null;
   if (reset) {
@@ -24,7 +24,7 @@ function dynamicCardGenerator(reset) {
   while (cardFaceArray.length > 0) {
     var divCardElem = $("<div>").addClass("card");
     var frontDivElem = $("<div>");
-    var backDivElem = $("<div>").addClass("back lfz-card");
+    var backDivElem = $("<div>").addClass("back tri-force");
     randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
     randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
     frontDivElem.addClass("front " + randCardFace);
@@ -60,12 +60,13 @@ function handleCardClick(event) {
       }, 500);
     } else {
       matches++;
+      transitionCardOut(firstCardClicked, secondCardClicked);
+      firstCardClicked = null;
+      secondCardClicked = null;
       if (matches === maxMatches) {
         games_played++;
         winConditionModal();
       }
-      firstCardClicked = null;
-      secondCardClicked = null;
     }
     displayStats();
   }
@@ -78,6 +79,12 @@ function handleCardClick(event) {
     dynamicCardGenerator(1);
     startDivClick();
   });
+}
+
+function transitionCardOut(firstCardClicked, secondCardClicked) {
+  firstCardClicked.addClass("matched matched-transition");
+  secondCardClicked.addClass("matched matched-transition");
+  return;
 }
 
 function calculateAccuracy() {
@@ -113,10 +120,11 @@ function displayStats(reset) {
 
 function startDivClick() {
   $("#startDiv").addClass("hidden");
-  $(".lfz-card").addClass("hidden");
+  $(".back").addClass("hidden");
+  $(".start-shadow").addClass("hidden");
   setTimeout(function() {
-    $(".lfz-card").removeClass("hidden");
-  }, 1500);
+    $(".back").removeClass("hidden");
+  }, 1000);
 }
 function winConditionModal() {
   $("#tryAgainDiv").show();
