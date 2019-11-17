@@ -56,13 +56,46 @@ main {
   box-shadow: rgb(255, 255, 0) 1px 1px 10px 3px;
 }
 
+  /*******************/
+ /* Card Animations */
+/*******************/
+
+.card-selected {
+  animation: glow 1.5s infinite;
+}
+
+@keyframes glow {
+  0% {box-shadow: 0px 0px 20px 2px rgb(252, 255, 0);}
+  50% {box-shadow: 0px 0px 25px 5px rgb(252, 255, 96);}
+  100% {box-shadow: 0px 0px 20px 2px rgb(255, 255, 0);}
+}
+
+/* .mismatch {
+  animation: hide-front 4.5s 1;
+}
+
+@keyframes hide-front {
+  0% {opacity: 0;}
+  25% {opacity: 25;}
+  50% {opacity: 25;}
+  75% {opacity: 25;}
+  100% {opacity: 100;}
+} */
+
+/* .mismatch {
+  opacity: 100;
+}
+
+.mismatch-transition {
+  transition: opacity 1.5s ease-in-out;
+} */
+
 .matched {
-  -webkit-transition: visibility 2s; /* Safari prior 6.1 */
-  transition: visibility 2s;
+  opacity: 0;
 }
 
 .matched-transition {
-  visibility: hidden;
+  transition: opacity 3s ease-in-out;
 }
 
   /***************/
@@ -175,6 +208,10 @@ main {
 /* .invisible {
   visibility: hidden;
 } */
+
+.see-through {
+  opacity: 0;
+}
 
 .hidden {
   display: none;

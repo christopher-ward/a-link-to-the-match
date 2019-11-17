@@ -40,27 +40,36 @@ function handleCardClick(event) {
     return;
   }
   currentCard.find(".back").addClass("hidden");
+  currentCard.find(".front").addClass("card-selected");
   if (firstCardClicked === null) {
     firstCardClicked = currentCard;
   } else {
     secondCardClicked = currentCard;
   }
   if (secondCardClicked) {
-    var firstClickImage = firstCardClicked.find(".front").css("background-image");
-    var secondClickImage = secondCardClicked.find(".front").css("background-image");
+    var firstCardFront = firstCardClicked.find(".front");
+    var secondCardFront = secondCardClicked.find(".front");
+    var firstCardBack = firstCardClicked.find(".back");
+    var secondCardBack = secondCardClicked.find(".back");
+    var firstClickImage = firstCardFront.css("background-image");
+    var secondClickImage = secondCardFront.css("background-image");
     if (firstClickImage != secondClickImage) {
       attempts++;
+      // firstCardBack.removeClass("hidden").addClass("mismatch");
+      // secondCardBack.removeClass("hidden").addClass("mismatch");
       $(".container").off("click", ".card", handleCardClick);
       setTimeout(function () { //first arg in setTimeout is anon function with the elements to be hidden
-        firstCardClicked.find(".back").removeClass("hidden");
-        secondCardClicked.find(".back").removeClass("hidden");
+        firstCardFront.removeClass("card-selected");
+        secondCardFront.removeClass("card-selected");
+        firstCardBack.removeClass("hidden");
+        secondCardBack.removeClass("hidden");
         firstCardClicked = null;
         secondCardClicked = null;
         $(".container").on("click", ".card", handleCardClick);
-      }, 500);
+      }, 1000);
     } else {
       matches++;
-      transitionCardOut(firstCardClicked, secondCardClicked);
+      matchCardTransitionOut(firstCardClicked, secondCardClicked);
       firstCardClicked = null;
       secondCardClicked = null;
       if (matches === maxMatches) {
@@ -75,13 +84,12 @@ function handleCardClick(event) {
   });
   $("#winDiv").on("click", "#tryAgainDiv", function () {
     displayStats(1);
-    // $(".card .back").removeClass("hidden");
     dynamicCardGenerator(1);
     startDivClick();
   });
 }
 
-function transitionCardOut(firstCardClicked, secondCardClicked) {
+function matchCardTransitionOut(firstCardClicked, secondCardClicked) {
   firstCardClicked.addClass("matched matched-transition");
   secondCardClicked.addClass("matched matched-transition");
   return;
@@ -116,6 +124,7 @@ function displayStats(reset) {
     attemptsMadeElem.text(attempts);
   }
   accuracyElem.text(calcAccuracy);
+  return;
 }
 
 function startDivClick() {
