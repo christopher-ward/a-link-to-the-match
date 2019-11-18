@@ -8,9 +8,9 @@ var attempts = null;
 var games_played = null;
 
 function initializeApp() {
-  dynamicCardGenerator();
+  dynamicCardGenerator(); //dynamically generates cards and applies their faces
   $(".container").on("click", ".card", handleCardClick);
-  $("#startDiv").on("click", startDivClick);
+  $("#startDiv").on("click", startDivClick); //a starting modal that is clicked to begin
 }
 
 function dynamicCardGenerator(reset) {
@@ -18,30 +18,31 @@ function dynamicCardGenerator(reset) {
   var cardFaceArray = ["js-logo", "js-logo", "gitHub-logo", "gitHub-logo", "html-logo", "html-logo", "mysql-logo", "mysql-logo", "php-logo", "php-logo", "react-logo", "react-logo", "green-rupee", "green-rupee", "blue-rupee", "blue-rupee", "css-logo", "css-logo"];
   var randCardFaceIndex = null;
   var randCardFace = null;
-  if (reset) {
+  if (reset) { //reset param is true than the container holding the cards is emptied
     $(".container").html("");
   }
+  //loops through the array and create cards with the faces in the array, as long as their are values remaining
   while (cardFaceArray.length > 0) {
     var divCardElem = $("<div>").addClass("card");
     var frontDivElem = $("<div>");
-    var backDivElem = $("<div>").addClass("back tri-force");
+    var backDivElem = $("<div>").addClass("back tri-force"); //the back is the same for all the cards
     randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
-    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
-    frontDivElem.addClass("front " + randCardFace);
+    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1); //splicing gets the face value and also decrements the loop
+    frontDivElem.addClass("front " + randCardFace); //the class of front and the face value are added
     divCardElem.append(frontDivElem);
     divCardElem.append(backDivElem);
-    $("div .container").append(divCardElem);
-  }
+    $("div .container").append(divCardElem); //append newly generated card element to the container
+  } //continue to loop until the cardFaceArray is empty
 }
 
 function handleCardClick(event) {
-  var currentCard = $(event.currentTarget);
-  if (currentCard.find(".back").hasClass("hidden")) {
-    return;
+  var currentCard = $(event.currentTarget); //gets and stores current card click event target
+  currentCard.addClass("flipped");
+  if (currentCard.find(".front").hasClass("card-selected")) {
+    return; //if the card has already been clicked than the function exits
   }
-  currentCard.find(".back").addClass("hidden");
   currentCard.find(".front").addClass("card-selected");
-  if (firstCardClicked === null) {
+  if (firstCardClicked === null) { //checks to see which event target is the first and which is second
     firstCardClicked = currentCard;
   } else {
     secondCardClicked = currentCard;
@@ -54,47 +55,53 @@ function handleCardClick(event) {
     var firstClickImage = firstCardFront.css("background-image");
     var secondClickImage = secondCardFront.css("background-image");
     if (firstClickImage != secondClickImage) {
-      attempts++;
-      // firstCardBack.removeClass("hidden").addClass("mismatch");
-      // secondCardBack.removeClass("hidden").addClass("mismatch");
+      attempts++; //if background images of the cards don't match, then increment attempts and reset clicked cards
       $(".container").off("click", ".card", handleCardClick);
       setTimeout(function () { //first arg in setTimeout is anon function with the elements to be hidden
+        firstCardClicked.removeClass("flipped");
+        secondCardClicked.removeClass("flipped");
         firstCardFront.removeClass("card-selected");
         secondCardFront.removeClass("card-selected");
-        firstCardBack.removeClass("hidden");
-        secondCardBack.removeClass("hidden");
         firstCardClicked = null;
         secondCardClicked = null;
         $(".container").on("click", ".card", handleCardClick);
       }, 1000);
     } else {
-      matches++;
-      matchCardTransitionOut(firstCardClicked, secondCardClicked);
+      matches++; //if selections match, matches increments and the cards fade out and current selections reset
+      matchCardTransitionOut(firstCardFront, secondCardFront);
       firstCardClicked = null;
       secondCardClicked = null;
       if (matches === maxMatches) {
         games_played++;
-        winConditionModal();
+        winConditionModal(); //display win condition
       }
     }
-    displayStats();
+    displayStats(); //refresh stats after selections have been made and processed
   }
+  //clicking anywhere on the win modal will hide it
   $("#winDiv").on("click", function () {
     hideModal();
+    $(".card").addClass("hidden");
+    afterTryAgainClick(1);
   });
+  //clicking on the try again div will reset the stats, cards, and start a new game
   $("#winDiv").on("click", "#tryAgainDiv", function () {
+    $(".card").addClass("hidden");
     displayStats(1);
     dynamicCardGenerator(1);
-    startDivClick();
+    afterTryAgainClick();
   });
+  $("button.monk-child").on("click", monkChildClick);
 }
 
-function matchCardTransitionOut(firstCardClicked, secondCardClicked) {
-  firstCardClicked.addClass("matched matched-transition");
-  secondCardClicked.addClass("matched matched-transition");
+//fades out matched cards
+function matchCardTransitionOut(firstCardFront, secondCardFront) {
+  firstCardFront.addClass("matched-transition matched");
+  secondCardFront.addClass("matched-transition matched");
   return;
 }
 
+//calculates the accuracy stat
 function calculateAccuracy() {
   var accuracy = ((matches / (matches + attempts)) * 100);
   if (!Number.isInteger(accuracy)) {
@@ -104,6 +111,7 @@ function calculateAccuracy() {
   return percentAccuracy;
 }
 
+//responsible for displaying the stats each pair and after game reset
 function displayStats(reset) {
   var aside = $("aside");
   var gamesPlayedElem = aside.find(".games span");
@@ -127,17 +135,49 @@ function displayStats(reset) {
   return;
 }
 
+function afterTryAgainClick(unhideChild) {
+  var monkDiv = $("#afterTryAgainClick");
+  var monkChildDiv = monkDiv.find("button#monkChild").addClass("hidden");
+  // debugger;
+  if (unhideChild) {
+    monkDiv.removeClass("hidden");
+    monkChildDiv.removeClass("hidden");
+    return;
+  }
+  else {
+    monkDiv.removeClass("hidden");
+    setTimeout(function(){
+      monkDiv.addClass("hidden");
+      startDivClick();
+    },3000);
+  }
+}
+
+function monkChildClick() {
+  $("#afterTryAgainClick").addClass("hidden");
+  $(".monk-child").addClass("hidden");
+  setTimeout(function(){
+    startDivClick();
+  }, 2000);
+}
+
+//starts the game
 function startDivClick() {
+  $(".card").find(".front").removeClass("matched matched-transition")
+  $(".card").removeClass("hidden");
   $("#startDiv").addClass("hidden");
-  $(".back").addClass("hidden");
+  $(".card").addClass("flipped");
   $(".start-shadow").addClass("hidden");
   setTimeout(function() {
-    $(".back").removeClass("hidden");
-  }, 1000);
-}
+    $(".card").removeClass("flipped");
+  }, 1500);}
+
+//responsible for win condition response
 function winConditionModal() {
-  $("#tryAgainDiv").show();
-  $("#winDiv").show();
+  setTimeout(function() {
+    $("#tryAgainDiv").show();
+    $("#winDiv").show();
+  }, 3000);
 }
 function hideModal() {
   $("#winDiv").hide();
