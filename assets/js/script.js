@@ -105,6 +105,8 @@ function handleCardClick(event) {
 
 //fades out matched cards
 function matchCardTransitionOut(firstCardFront, secondCardFront) {
+  firstCardFront.parent().addClass("no-hover");
+  secondCardFront.parent().addClass("no-hover");
   firstCardFront.addClass("matched-transition matched");
   secondCardFront.addClass("matched-transition matched");
   return;
@@ -173,7 +175,7 @@ function monkChildClick() {
 function startDivClick() {
   dynamicCardGenerator(1);
   $(".card").find(".front").removeClass("matched matched-transition");
-  $(".card").removeClass("hidden");
+  $(".card").removeClass("hidden no-hover");
   $("#startDiv").addClass("hidden");
   $(".card").addClass("flipped");
   $(".start-shadow").addClass("hidden");
