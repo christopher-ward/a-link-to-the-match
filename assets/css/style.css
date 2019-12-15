@@ -15,7 +15,7 @@ header {
 }
 
 h1, h2 {
-  color: #e5ac1b
+  color: #e5ac1b;
 }
 
 .game-area {
@@ -27,6 +27,12 @@ h1, h2 {
 aside {
   width: 17%;
   text-align: center;
+  background-color: rgba(59, 155, 162, 0.4);
+  border-radius: 10px;
+}
+
+aside h2.stats-head {
+  color: #fffc02;
 }
 
 aside .stats {
@@ -35,19 +41,15 @@ aside .stats {
   align-items: center;
   font-size: 1.5rem;
   margin: 8% 10px;
-  background-color: lightblue;
+  background-color: rgba(2, 6, 33, 0.8);
+  color: #e5ac1b;
   height: 10%;
 }
 
-main {
-  display: flex;
-  width: 75%;
-}
-
-.container {
+main.container {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: 75%;
 }
 
 .card {
@@ -56,6 +58,7 @@ main {
   width: 15%;
   transform-style: preserve-3d;
   transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1);
+  cursor: pointer;
 }
 
 .card:hover {
@@ -66,40 +69,44 @@ main {
  /* Card Images */
 /***************/
 
-.js-logo {
+.black-bokoblin {
   background-image: url("../images/botw/creatures/BotW_Black_Bokoblin_Model.png");
 }
 
-.css-logo {
+.blue-maned-lynel {
   background-image: url("../images/botw/creatures/BotW_Blue-Maned_Lynel_Model.png");
 }
 
-.html-logo {
+.blue-chuchu {
   background-image: url("../images/botw/creatures/BotW_Chuchu_Model.png");
 }
 
-.mysql-logo {
+.golden-bokoblin {
   background-image: url("../images/botw/creatures/BotW_Golden_Bokoblin_Model.png");
-}
-
-.blue-rupee {
-  background-image: url("../images/botw/rupees/blue_rupee.png");
 }
 
 .green-rupee {
   background-image: url("../images/botw/rupees/green_rupee.png");
 }
 
-.php-logo {
-  background-image: url("../images/botw/rupees/gold_rupee.png");
+.blue-rupee {
+  background-image: url("../images/botw/rupees/blue_rupee.png");
 }
 
-.react-logo {
+.red-rupee {
+  background-image: url("../images/botw/rupees/red_rupee.png");
+}
+
+.purple-rupee {
   background-image: url("../images/botw/rupees/purple_rupee.png");
 }
 
-.gitHub-logo {
-  background-image: url("../images/botw/rupees/red_rupee.png");
+.silver-rupee {
+  background-image: url("../images/botw/rupees/silver_rupee.png");
+}
+
+.gold-rupee {
+  background-image: url("../images/botw/rupees/gold_rupee.png");
 }
 
   /*****************/
@@ -140,11 +147,12 @@ main {
 .front {
   background-color: #1b3f3f;
   transform: rotateY(180deg);
+  border-radius: 10px;
 }
 
 .back, .front {
-  /* opacity: .7; */
   backface-visibility: hidden;
+  border-radius: 3px;
 }
 
 .flipped {
@@ -160,6 +168,23 @@ main {
   opacity: 0;
 }
 
+.stretch-transition {
+  transform: scale(3) skew(30deg, -30deg) rotate(-30deg, 30deg);
+  transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);
+}
+
+.stretch {
+  transform: scale(3) skew(30deg, -30deg) rotate(-30deg, 30deg);
+  transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);
+  opacity: 0;
+}
+
+/* @keyframes stretch {
+  0% {transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);}
+  50% {}
+  100% {
+} */
+
   /**********************/
  /* Modals and Pop-Ups */
 /**********************/
@@ -172,11 +197,12 @@ main {
   top: 43%;
   width: 35%;
   height: 15%;
-  background-color: #00c3d2;
+  background-color: rgba(0, 195, 210, 0.9);
   color: rgb(255, 252, 2);
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .start-reveal:hover, button.monk-child:hover, .try-again:hover {
@@ -231,6 +257,7 @@ button.monk-child {
   background-color: #02c1d3;
   color: white;
   border-radius: 8%;
+  cursor: pointer;
 }
 
 .try-again {
@@ -242,6 +269,7 @@ button.monk-child {
     border: 1px solid gray;
     padding: 5px;
     display: none;
+    cursor: pointer;
 }
 
 .see-through {
