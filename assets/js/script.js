@@ -15,11 +15,22 @@ function initializeApp() {
 
 function dynamicCardGenerator(reset) {
   //need to first create array of the different possible faces(fronts) of the cards
-  var cardFaceArray = ["js-logo", "js-logo", "gitHub-logo", "gitHub-logo", "html-logo", "html-logo", "mysql-logo", "mysql-logo", "php-logo", "php-logo", "react-logo", "react-logo", "green-rupee", "green-rupee", "blue-rupee", "blue-rupee", "css-logo", "css-logo"];
+  var cardFaceArray = [
+    "black-bokoblin", "black-bokoblin",
+    "red-rupee", "red-rupee",
+    "blue-chuchu", "blue-chuchu",
+    "golden-bokoblin", "golden-bokoblin",
+    "gold-rupee", "gold-rupee",
+    "purple-rupee", "purple-rupee",
+    "green-rupee", "green-rupee",
+    "blue-rupee", "blue-rupee",
+    "blue-maned-lynel", "blue-maned-lynel"];
+  // var rupee
   var randCardFaceIndex = null;
   var randCardFace = null;
   if (reset) { //reset param is true than the container holding the cards is emptied
     $(".container").html("");
+    displayStats(1);
   }
   //loops through the array and create cards with the faces in the array, as long as their are values remaining
   while (cardFaceArray.length > 0) {
@@ -50,8 +61,6 @@ function handleCardClick(event) {
   if (secondCardClicked) {
     var firstCardFront = firstCardClicked.find(".front");
     var secondCardFront = secondCardClicked.find(".front");
-    var firstCardBack = firstCardClicked.find(".back");
-    var secondCardBack = secondCardClicked.find(".back");
     var firstClickImage = firstCardFront.css("background-image");
     var secondClickImage = secondCardFront.css("background-image");
     if (firstClickImage != secondClickImage) {
@@ -137,20 +146,19 @@ function displayStats(reset) {
 
 function afterTryAgainClick(unhideChild) {
   var monkDiv = $("#afterTryAgainClick");
-  var monkChildDiv = monkDiv.find("button#monkChild").addClass("hidden");
-  // debugger;
+  var monkChildDiv = $("#monkChild");
   if (unhideChild) {
     monkDiv.removeClass("hidden");
     monkChildDiv.removeClass("hidden");
     return;
   }
-  else {
     monkDiv.removeClass("hidden");
+    monkChildDiv.addClass("hidden");
     setTimeout(function(){
       monkDiv.addClass("hidden");
       startDivClick();
     },3000);
-  }
+    return;
 }
 
 function monkChildClick() {
@@ -163,14 +171,16 @@ function monkChildClick() {
 
 //starts the game
 function startDivClick() {
-  $(".card").find(".front").removeClass("matched matched-transition")
+  dynamicCardGenerator(1);
+  $(".card").find(".front").removeClass("matched matched-transition");
   $(".card").removeClass("hidden");
   $("#startDiv").addClass("hidden");
   $(".card").addClass("flipped");
   $(".start-shadow").addClass("hidden");
   setTimeout(function() {
     $(".card").removeClass("flipped");
-  }, 1500);}
+  }, 1500);
+}
 
 //responsible for win condition response
 function winConditionModal() {
@@ -179,6 +189,7 @@ function winConditionModal() {
     $("#winDiv").show();
   }, 3000);
 }
+
 function hideModal() {
   $("#winDiv").hide();
   $("#tryAgainDiv").hide();
