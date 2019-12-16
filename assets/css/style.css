@@ -66,7 +66,7 @@ main.container {
 }
 
 .no-hover{
-    pointer-events: none;
+  pointer-events: none;
 }
 
   /***************/
@@ -265,15 +265,15 @@ button.monk-child {
 }
 
 .try-again {
-    position: absolute;
-    left: 33%;
-    top: 22%;
-    transform: translate(-50%,-50%);
-    background-color: white;
-    border: 1px solid gray;
-    padding: 5px;
-    display: none;
-    cursor: pointer;
+  position: absolute;
+  left: 33%;
+  top: 22%;
+  transform: translate(-50%,-50%);
+  background-color: white;
+  border: 1px solid gray;
+  padding: 5px;
+  display: none;
+  cursor: pointer;
 }
 
 .see-through {
@@ -282,4 +282,51 @@ button.monk-child {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 1150px) and (max-height: 826px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  .game-area {
+    flex-direction: column;
+    justify-content: space-between;
+    height: 94%;
+  }
+  aside .stats {
+    display: flex;
+    font-size: 1.5rem;
+    background-color: rgba(2, 6, 33, 0.8);
+    color: #e5ac1b;
+  }
+  main.container {
+    justify-content: center;
+    width: 100%;
+    height: 84%;
+  }
+  .win-message {
+    left: 10%;
+  }
+  .win-container {
+    width: 100%;
+  }
+  .monk {
+    height: 58%;
+    width: 35%;
+    top: 15%;
+    left: 10%;
+  }
+  button.monk-child {
+    width: 50%;
+  }
+  .try-again {
+    left: 25%;
+    background-color: #4e796f;
+    color: #ffff00;
+    border-radius: 15%;
+    padding: 3px;
+  }
 }
