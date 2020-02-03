@@ -8,13 +8,12 @@ var attempts = null;
 var games_played = null;
 
 function initializeApp() {
-  dynamicCardGenerator(); //dynamically generates cards and applies their faces
+  dynamicCardGenerator();
   $(".container").on("click", ".card", handleCardClick);
-  $("#startDiv").on("click", startDivClick); //a starting modal that is clicked to begin
+  $("#startDiv").on("click", startDivClick);
 }
 
 function dynamicCardGenerator(reset) {
-  //need to first create array of the different possible faces(fronts) of the cards
   var cardFaceArray = [
     "black-bokoblin", "black-bokoblin",
     "red-rupee", "red-rupee",
@@ -25,35 +24,33 @@ function dynamicCardGenerator(reset) {
     "green-rupee", "green-rupee",
     "blue-rupee", "blue-rupee",
     "blue-maned-lynel", "blue-maned-lynel"];
-  // var rupee
   var randCardFaceIndex = null;
   var randCardFace = null;
-  if (reset) { //reset param is true than the container holding the cards is emptied
+  if (reset) {
     $(".container").html("");
     displayStats(1);
   }
-  //loops through the array and create cards with the faces in the array, as long as their are values remaining
   while (cardFaceArray.length > 0) {
     var divCardElem = $("<div>").addClass("card");
     var frontDivElem = $("<div>");
-    var backDivElem = $("<div>").addClass("back tri-force"); //the back is the same for all the cards
+    var backDivElem = $("<div>").addClass("back tri-force");
     randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
-    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1); //splicing gets the face value and also decrements the loop
-    frontDivElem.addClass("front " + randCardFace); //the class of front and the face value are added
+    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
+    frontDivElem.addClass("front " + randCardFace);
     divCardElem.append(frontDivElem);
     divCardElem.append(backDivElem);
-    $("div .container").append(divCardElem); //append newly generated card element to the container
-  } //continue to loop until the cardFaceArray is empty
+    $("div .container").append(divCardElem);
+  }
 }
 
 function handleCardClick(event) {
-  var currentCard = $(event.currentTarget); //gets and stores current card click event target
+  var currentCard = $(event.currentTarget);
   currentCard.addClass("flipped");
   if (currentCard.find(".front").hasClass("card-selected")) {
-    return; //if the card has already been clicked than the function exits
+    return;
   }
   currentCard.find(".front").addClass("card-selected");
-  if (firstCardClicked === null) { //checks to see which event target is the first and which is second
+  if (firstCardClicked === null) {
     firstCardClicked = currentCard;
   } else {
     secondCardClicked = currentCard;
@@ -64,9 +61,9 @@ function handleCardClick(event) {
     var firstClickImage = firstCardFront.css("background-image");
     var secondClickImage = secondCardFront.css("background-image");
     if (firstClickImage != secondClickImage) {
-      attempts++; //if background images of the cards don't match, then increment attempts and reset clicked cards
+      attempts++;
       $(".container").off("click", ".card", handleCardClick);
-      setTimeout(function () { //first arg in setTimeout is anon function with the elements to be hidden
+      setTimeout(function () {
         firstCardClicked.removeClass("flipped");
         secondCardClicked.removeClass("flipped");
         firstCardFront.removeClass("card-selected");
@@ -76,24 +73,22 @@ function handleCardClick(event) {
         $(".container").on("click", ".card", handleCardClick);
       }, 1000);
     } else {
-      matches++; //if selections match, matches increments and the cards fade out and current selections reset
+      matches++;
       matchCardTransitionOut(firstCardFront, secondCardFront);
       firstCardClicked = null;
       secondCardClicked = null;
       if (matches === maxMatches) {
         games_played++;
-        winConditionModal(); //display win condition
+        winConditionModal();
       }
     }
-    displayStats(); //refresh stats after selections have been made and processed
+    displayStats();
   }
-  //clicking anywhere on the win modal will hide it
   $("#winDiv").on("click", function () {
     hideModal();
     $(".card").addClass("hidden");
     afterTryAgainClick(1);
   });
-  //clicking on the try again div will reset the stats, cards, and start a new game
   $("#winDiv").on("click", "#tryAgainDiv", function () {
     $(".card").addClass("hidden");
     displayStats(1);
@@ -103,7 +98,6 @@ function handleCardClick(event) {
   $("button.monk-child").on("click", monkChildClick);
 }
 
-//fades out matched cards
 function matchCardTransitionOut(firstCardFront, secondCardFront) {
   firstCardFront.parent().addClass("no-hover");
   secondCardFront.parent().addClass("no-hover");
@@ -112,7 +106,6 @@ function matchCardTransitionOut(firstCardFront, secondCardFront) {
   return;
 }
 
-//calculates the accuracy stat
 function calculateAccuracy() {
   var accuracy = ((matches / (matches + attempts)) * 100);
   if (!Number.isInteger(accuracy)) {
@@ -122,13 +115,12 @@ function calculateAccuracy() {
   return percentAccuracy;
 }
 
-//responsible for displaying the stats each pair and after game reset
 function displayStats(reset) {
   var aside = $("aside");
   var gamesPlayedElem = aside.find(".games span");
   var attemptsMadeElem = aside.find(".attempts span");
   var accuracyElem = aside.find(".accuracy span");
-  var calcAccuracy = calculateAccuracy(); //use to update the text in the accuracy element
+  var calcAccuracy = calculateAccuracy();
   if (reset) {
     matches = 0;
     attempts = 0;
@@ -171,7 +163,6 @@ function monkChildClick() {
   }, 2000);
 }
 
-//starts the game
 function startDivClick() {
   dynamicCardGenerator(1);
   $(".card").find(".front").removeClass("matched matched-transition");
@@ -184,7 +175,6 @@ function startDivClick() {
   }, 1500);
 }
 
-//responsible for win condition response
 function winConditionModal() {
   setTimeout(function() {
     $("#tryAgainDiv").show();

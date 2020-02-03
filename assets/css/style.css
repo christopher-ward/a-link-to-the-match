@@ -105,7 +105,7 @@ main.container {
   height: 100%;
   width: 100%;
 }
-.tri-force { /* card back (tri-force atm)*/
+.tri-force { /* card back */
   background-image: url("../images/botw/card_backs/320px-triforce.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -114,7 +114,6 @@ main.container {
   /*******************/
  /* Card Animations */
 /*******************/
-
 .card-selected {
   animation: glow 1.5s infinite;
 }
@@ -152,7 +151,6 @@ main.container {
   transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);
   opacity: 0;
 }
-
   /**********************/
  /* Modals and Pop-Ups */
 /**********************/
