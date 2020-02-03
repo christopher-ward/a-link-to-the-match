@@ -1,6 +1,6 @@
 # A Link to the Match
 
-> - A Link to the Match is a matching game in which a player attempts to match the images contained on "playing cards".
+> - A Link to the Match is a game in which a player attempts to find matching pairs of images by flipping over cards.
 
 ## What is this app about?
 <details>
