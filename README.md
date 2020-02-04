@@ -6,7 +6,7 @@ A Link to the Match is a game in which a player attempts to find matching pairs 
 ## Technologies Used
 
 ## Live Demo
-Link: https://a-link-to-the-match.wardofcode.com/
+Link: <https://a-link-to-the-match.wardofcode.com/>
 ## Features
 
 ## Preview
