@@ -1,9 +1,18 @@
 # A Link to the Match
 
-> - A Link to the Match is a game in which a player attempts to find matching pairs of images by flipping over cards.
+> - Maintained by: `christopher-ward` 
 
-## What is this app about?
-<details>
-<summary> &#8592; Click arrow for details</summary>
+A Link to the Match is a game in which a player attempts to find matching pairs of images by flipping over cards.
+## Technologies Used
 
-</details>
+## Live Demo
+
+## Features
+
+## Preview
+
+## Development
+
+### System Requirements
+
+### Getting Started
