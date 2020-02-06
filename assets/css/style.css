@@ -1,19 +1,18 @@
 body {
   font-family: 'Spectral', serif;
   height: 100vh;
-  width: 98vw;
   margin: 0;
   background-image: url("../images/botw/the-legend-of-zelda-breath-of-the-wild-wallpaper-hd.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 header {
-  padding-bottom: 26px;
+  padding: 25px 0 20px 0;
   font-size: 1.5rem;
   text-align: center;
 }
 h1 {
-  margin: 15px 0 0 0;
+  margin: 0;
 }
 h1, h2 {
   color: #e5ac1b;
@@ -159,11 +158,12 @@ main.container {
 /**********************/
 .start-reveal {
   display: flex;
+  flex-direction: column;
   position: absolute;
   font-size: 2.25rem;
-  left: 26.5%;
+  left: 33%;
   bottom: 32%;
-  width: 60%;
+  width: 50%;
   height: 35%;
   background-color: rgba(0, 195, 210, 0.9);
   background-image: url(../images/botw/slate/kieran-baker-botw-sheikah-wall-scaled-down.jpg);
@@ -175,6 +175,9 @@ main.container {
   align-items: center;
   border-radius: 10px;
   cursor: pointer;
+}
+.start-reveal p {
+  margin: 0;
 }
 .start-reveal:hover, button.monk-child:hover {
   box-shadow: rgb(255, 255, 0) 1px 1px 10px 3px;
