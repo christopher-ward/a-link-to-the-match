@@ -1,22 +1,23 @@
 class Rupee {
   constructor() {
     this.rupees = [
-      "green_rupee",
-      "blue_rupee",
-      "red_rupee",
-      "purple_rupee",
-      "silver_rupee",
-      "gold_rupee"
+      "green_rupee": 1,
+      "blue_rupee": 5,
+      "red_rupee": 20,
+      "purple_rupee": 50,
+      "silver_rupee": 200,
+      "gold_rupee": 300
     ];
-    this.values = [
-      1,
-      5,
-      20,
-      50,
-      200,
-      300
-    ]
   }
+  var rupees = [
+  { "green_rupee": 1 },
+  { "blue_rupee": 5 },
+  { "red_rupee": 20 },
+  { "purple_rupee": 50 },
+  { "silver_rupee": 200 },
+  { "gold_rupee": 300 }
+];
+rupees[Math.floor(Math.random() * 6)]
 
   randomRupee() {
     this.randRupee = Math.floor(Math.random() * this.rupees.length) + 1;
@@ -26,6 +27,5 @@ class Rupee {
   getRupee() {
     return this.randomRupee();
   }
-
 
 }
