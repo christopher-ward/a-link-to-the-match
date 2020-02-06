@@ -18,9 +18,3 @@ A Link to the Match is a game in which a player attempts to find matching pairs 
 Link: <https://match.wardofcode.com/>
 
 ## Preview
-
-## Development
-
-### System Requirements
-
-### Getting Started
