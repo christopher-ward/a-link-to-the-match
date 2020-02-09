@@ -1,16 +1,19 @@
 body {
   font-family: 'Spectral', serif;
-  height: 97vh;
-  width: 98vw;
+  height: 100vh;
   margin: 0;
   background-image: url("../images/botw/the-legend-of-zelda-breath-of-the-wild-wallpaper-hd.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 header {
-  padding-bottom: 26px;
+  padding: 25px 0 20px 0;
   font-size: 1.5rem;
   text-align: center;
+  user-select: none;
+}
+h1 {
+  margin: 0;
 }
 h1, h2 {
   color: #e5ac1b;
@@ -25,6 +28,7 @@ aside {
   text-align: center;
   background-color: rgba(59, 155, 162, 0.4);
   border-radius: 10px;
+  user-select: none;
 }
 aside h2.stats-head {
   color: #fffc02;
@@ -156,14 +160,15 @@ main.container {
 /**********************/
 .start-reveal {
   display: flex;
+  flex-direction: column;
   position: absolute;
   font-size: 2.25rem;
-  left: 27%;
-  top: 27%;
-  width: 60%;
-  height: 51%;
+  left: 33%;
+  bottom: 32%;
+  width: 50%;
+  height: 35%;
   background-color: rgba(0, 195, 210, 0.9);
-  background-image: url(../images/botw/slate/kieran-baker-botw-sheikah-wall.jpg);
+  background-image: url(../images/botw/slate/kieran-baker-botw-sheikah-wall-scaled-down.jpg);
   background-position: center;
   background-blend-mode: soft-light;
   color: rgb(255, 252, 2);
@@ -173,31 +178,36 @@ main.container {
   border-radius: 10px;
   cursor: pointer;
 }
+.start-reveal p {
+  margin: 0;
+}
 .start-reveal:hover, button.monk-child:hover {
   box-shadow: rgb(255, 255, 0) 1px 1px 10px 3px;
 }
 .win-message {
-  position: relative;
+  position: absolute;
   left: 15%;
   color: rgb(255, 252, 2);
 }
 .start-shadow {
   position: absolute;
   width: 100%;
-  height: 85%;
+  height: 80%;
   opacity: 0.2;
 }
 .win-container {
-  font-size: 1.5rem;
-  width: 50%;
-  height: 50%;
-  background-image: url(../images/botw/The_Legend_of_Zelda_Breath_of_the_Wild_logo.png);
-  background-size: contain;
-  background-repeat: no-repeat;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-21%,-59%);
+  width: 38%;
+  height: 51%;
+  transform: translate(-33%,-60%);
+  font-size: 1.5rem;
+  background-image: url(../images/botw/The_Legend_of_Zelda_Breath_of_the_Wild_logo-outlined_4.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-color: rgba(95, 158, 160, 0.7); */
   display: none;
 }
 .monk {
@@ -224,13 +234,12 @@ button.monk-child {
 }
 .try-again {
   position: absolute;
-  left: 33%;
-  top: 22%;
-  transform: translate(-50%,-50%);
+  left: 28%;
+  top: 14%;
   font-size: 2rem;
   color: #02c1d4;
   border: 3px solid rgb(2, 193, 212);
-  border-radius: 2%;
+  border-radius: 10px;
   padding: 5px;
   display: none;
   cursor: pointer;
@@ -247,7 +256,7 @@ button.monk-child {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    width: auto;
   }
   header {
     display: none;
@@ -310,11 +319,11 @@ button.monk-child {
   .try-again {
     position: relative;
     top: 8%;
-    left: 50%;
+    left: 26%;
     width: 43%;
     text-align: center;
-    background-color: #4e796f;
-    color: #ffff00;
-    border-radius: 15%;
+    background-color: #29403b;
+    color: rgb(2, 193, 212);
+    border-radius: 10px;
   }
 }
