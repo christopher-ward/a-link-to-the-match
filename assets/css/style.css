@@ -155,6 +155,31 @@ main.container {
   transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);
   opacity: 0;
 }
+  /********************/
+ /* Modal Animations */
+/********************/
+.type-line {
+  border-right: 2px solid rgba(125,25,205,0);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.anim-typewriter {
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) 10 normal;
+}
+.anim-typewriter-2 {
+  animation: typewriter 4s steps(44) 5s 1 normal both,
+             blinkTextCursor 500ms steps(44) 5s 5.5 normal;
+}
+@keyframes typewriter {
+  from{width: 0;}
+  to{width: 14em;}
+}
+@keyframes blinkTextCursor {
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
   /**********************/
  /* Modals and Pop-Ups */
 /**********************/
@@ -167,7 +192,7 @@ main.container {
   bottom: 32%;
   width: 50%;
   height: 35%;
-  background-color: rgba(0, 195, 210, 0.9);
+  background-color: rgba(39, 240, 255, 0.68);
   background-image: url(../images/botw/slate/kieran-baker-botw-sheikah-wall-scaled-down.jpg);
   background-position: center;
   background-blend-mode: soft-light;
@@ -175,19 +200,20 @@ main.container {
   text-shadow: 2px 2px black, -2px -2px black, -2px 2px black, 2px -2px black;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 50px;
   cursor: pointer;
 }
 .start-reveal p {
   margin: 0;
 }
 .start-reveal:hover, button.monk-child:hover {
-  box-shadow: rgb(255, 255, 0) 1px 1px 10px 3px;
-}
-.win-message {
-  position: absolute;
-  left: 15%;
-  color: rgb(255, 252, 2);
+  box-shadow: rgba(237, 237, 153, 0.97) 31px 31px 63px,
+  rgba(237, 237, 153, 0.97) -31px 31px 63px,
+  rgba(237, 237, 153, 0.97) 31px -31px 63px,
+  rgba(237, 237, 153, 0.97) -31px -31px 63px;
+  border-radius: 50px;
+  transform: scale(1.025);
+  background-color: rgba(39, 124, 255, 0.7);
 }
 .start-shadow {
   position: absolute;
@@ -207,18 +233,24 @@ main.container {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* background-color: rgba(95, 158, 160, 0.7); */
   display: none;
+  cursor: pointer;
+}
+.monk-div {
+  display: flex;
 }
 .monk {
   position: absolute;
   height: 52%;
+  min-height: 450px;
+  min-width: 365px;
   width: 23%;
-  top: 10%;
-  left: 29%;
+  top: 21%;
+  left: 26%;
   background-image: url(../images/botw/monk/monk.png);
   background-size: contain;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 button.monk-child {
   width: 46%;
@@ -229,7 +261,7 @@ button.monk-child {
   left: 25%;
   background-color: #02c1d3;
   color: white;
-  border-radius: 8%;
+  border-radius: 8px;
   cursor: pointer;
 }
 .try-again {

@@ -1,11 +1,11 @@
 $(document).ready(initializeApp);
 
-var firstCardClicked = null;
-var secondCardClicked = null;
-var matches = null;
-var maxMatches = 9;
-var attempts = null;
-var games_played = null;
+let firstCardClicked = null;
+let secondCardClicked = null;
+let matches = null;
+const maxMatches = 9;
+let attempts = null;
+let games_played = null;
 
 function initializeApp() {
   dynamicCardGenerator();
@@ -14,7 +14,7 @@ function initializeApp() {
 }
 
 function dynamicCardGenerator(reset) {
-  var cardFaceArray = [
+  const cardFaceArray = [
     "black-bokoblin", "black-bokoblin",
     "red-rupee", "red-rupee",
     "blue-chuchu", "blue-chuchu",
@@ -24,16 +24,16 @@ function dynamicCardGenerator(reset) {
     "green-rupee", "green-rupee",
     "blue-rupee", "blue-rupee",
     "blue-maned-lynel", "blue-maned-lynel"];
-  var randCardFaceIndex = null;
-  var randCardFace = null;
+  let randCardFaceIndex = null;
+  let randCardFace = null;
   if (reset) {
     $(".container").html("");
     displayStats(1);
   }
   while (cardFaceArray.length > 0) {
-    var divCardElem = $("<div>").addClass("card");
-    var frontDivElem = $("<div>");
-    var backDivElem = $("<div>").addClass("back tri-force");
+    let divCardElem = $("<div>").addClass("card");
+    let frontDivElem = $("<div>");
+    let backDivElem = $("<div>").addClass("back tri-force");
     randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
     randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
     frontDivElem.addClass("front " + randCardFace);
@@ -44,7 +44,7 @@ function dynamicCardGenerator(reset) {
 }
 
 function handleCardClick(event) {
-  var currentCard = $(event.currentTarget);
+  let currentCard = $(event.currentTarget);
   currentCard.addClass("flipped");
   if (currentCard.find(".front").hasClass("card-selected")) {
     return;
@@ -56,10 +56,10 @@ function handleCardClick(event) {
     secondCardClicked = currentCard;
   }
   if (secondCardClicked) {
-    var firstCardFront = firstCardClicked.find(".front");
-    var secondCardFront = secondCardClicked.find(".front");
-    var firstClickImage = firstCardFront.css("background-image");
-    var secondClickImage = secondCardFront.css("background-image");
+    let firstCardFront = firstCardClicked.find(".front");
+    let secondCardFront = secondCardClicked.find(".front");
+    let firstClickImage = firstCardFront.css("background-image");
+    let secondClickImage = secondCardFront.css("background-image");
     if (firstClickImage != secondClickImage) {
       attempts++;
       $(".container").off("click", ".card", handleCardClick);
@@ -107,20 +107,20 @@ function matchCardTransitionOut(firstCardFront, secondCardFront) {
 }
 
 function calculateAccuracy() {
-  var accuracy = ((matches / (matches + attempts)) * 100);
+  let accuracy = ((matches / (matches + attempts)) * 100);
   if (!Number.isInteger(accuracy)) {
     accuracy = accuracy.toFixed(2)
   }
-  var percentAccuracy = accuracy + "%";
+  let percentAccuracy = `${accuracy}%`;
   return percentAccuracy;
 }
 
 function displayStats(reset) {
-  var aside = $("aside");
-  var gamesPlayedElem = aside.find(".games span");
-  var attemptsMadeElem = aside.find(".attempts span");
-  var accuracyElem = aside.find(".accuracy span");
-  var calcAccuracy = calculateAccuracy();
+  let aside = $("aside");
+  let gamesPlayedElem = aside.find(".games span");
+  let attemptsMadeElem = aside.find(".attempts span");
+  let accuracyElem = aside.find(".accuracy span");
+  let calcAccuracy = calculateAccuracy();
   if (reset) {
     matches = 0;
     attempts = 0;
@@ -139,8 +139,8 @@ function displayStats(reset) {
 }
 
 function afterTryAgainClick(unhideChild) {
-  var monkDiv = $("#afterTryAgainClick");
-  var monkChildDiv = $("#monkChild");
+  const monkDiv = $("#afterTryAgainClick");
+  const monkChildDiv = $("#monkChild");
   if (unhideChild) {
     monkDiv.removeClass("hidden");
     monkChildDiv.removeClass("hidden");
