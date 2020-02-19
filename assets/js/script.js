@@ -13,36 +13,6 @@ function initializeApp() {
   $("#startDiv").on("click", startDivClick);
 }
 
-function dynamicCardGenerator(reset) {
-  const cardFaceArray = [
-    "black-bokoblin", "black-bokoblin",
-    "red-rupee", "red-rupee",
-    "blue-chuchu", "blue-chuchu",
-    "golden-bokoblin", "golden-bokoblin",
-    "gold-rupee", "gold-rupee",
-    "purple-rupee", "purple-rupee",
-    "green-rupee", "green-rupee",
-    "blue-rupee", "blue-rupee",
-    "blue-maned-lynel", "blue-maned-lynel"];
-  let randCardFaceIndex = null;
-  let randCardFace = null;
-  if (reset) {
-    $(".container").html("");
-    displayStats(1);
-  }
-  while (cardFaceArray.length > 0) {
-    let divCardElem = $("<div>").addClass("card");
-    let frontDivElem = $("<div>");
-    let backDivElem = $("<div>").addClass("back tri-force");
-    randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
-    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
-    frontDivElem.addClass("front " + randCardFace);
-    divCardElem.append(frontDivElem);
-    divCardElem.append(backDivElem);
-    $("div .container").append(divCardElem);
-  }
-}
-
 function handleCardClick(event) {
   let currentCard = $(event.currentTarget);
   currentCard.addClass("flipped");
@@ -96,6 +66,53 @@ function handleCardClick(event) {
     afterTryAgainClick();
   });
   $("button.monk-child").on("click", monkChildClick);
+}
+
+function startDivClick() {
+  $(".container").off("click", ".card", handleCardClick);
+  dynamicCardGenerator(1);
+  $(".card").find(".front").removeClass("matched matched-transition");
+  $(".card").removeClass("hidden no-hover");
+  $("#startDiv").addClass("hidden");
+  $(".card").addClass("flipped");
+  $(".start-shadow").removeClass("hidden");
+  setTimeout(function () {
+    $(".card").removeClass("flipped");
+    $(".start-shadow").addClass("hidden");
+  }, 1500);
+  setTimeout(()=>{
+    $(".container").on("click", ".card", handleCardClick);
+  }, 1800);
+}
+
+function dynamicCardGenerator(reset) {
+  const cardFaceArray = [
+    "black-bokoblin", "black-bokoblin",
+    "red-rupee", "red-rupee",
+    "blue-chuchu", "blue-chuchu",
+    "golden-bokoblin", "golden-bokoblin",
+    "gold-rupee", "gold-rupee",
+    "purple-rupee", "purple-rupee",
+    "green-rupee", "green-rupee",
+    "blue-rupee", "blue-rupee",
+    "blue-maned-lynel", "blue-maned-lynel"];
+  let randCardFaceIndex = null;
+  let randCardFace = null;
+  if (reset) {
+    $("main.container").html("");
+    displayStats(1);
+  }
+  while (cardFaceArray.length > 0) {
+    let divCardElem = $("<div>").addClass("card");
+    let frontDivElem = $("<div>");
+    let backDivElem = $("<div>").addClass("back tri-force");
+    randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
+    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
+    frontDivElem.addClass("front " + randCardFace);
+    divCardElem.append(frontDivElem);
+    divCardElem.append(backDivElem);
+    $("main.container").append(divCardElem);
+  }
 }
 
 function matchCardTransitionOut(firstCardFront, secondCardFront) {
@@ -161,19 +178,6 @@ function monkChildClick() {
   setTimeout(function(){
     startDivClick();
   }, 2000);
-}
-
-function startDivClick() {
-  dynamicCardGenerator(1);
-  $(".card").find(".front").removeClass("matched matched-transition");
-  $(".card").removeClass("hidden no-hover");
-  $("#startDiv").addClass("hidden");
-  $(".card").addClass("flipped");
-  $(".start-shadow").removeClass("hidden");
-  setTimeout(function() {
-    $(".card").removeClass("flipped");
-    $(".start-shadow").addClass("hidden");
-  }, 1500);
 }
 
 function winConditionModal() {
