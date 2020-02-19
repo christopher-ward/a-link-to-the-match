@@ -146,15 +146,6 @@ main.container {
 .matched {
   opacity: 0;
 }
-.stretch-transition {
-  transform: scale(3) skew(30deg, -30deg) rotate(-30deg, 30deg);
-  transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);
-}
-.stretch {
-  transform: scale(3) skew(30deg, -30deg) rotate(-30deg, 30deg);
-  transform: scale(1) skew(0deg, 0deg) rotate(0deg, 0deg);
-  opacity: 0;
-}
   /********************/
  /* Modal Animations */
 /********************/

@@ -169,9 +169,10 @@ function startDivClick() {
   $(".card").removeClass("hidden no-hover");
   $("#startDiv").addClass("hidden");
   $(".card").addClass("flipped");
-  $(".start-shadow").addClass("hidden");
+  $(".start-shadow").removeClass("hidden");
   setTimeout(function() {
     $(".card").removeClass("flipped");
+    $(".start-shadow").addClass("hidden");
   }, 1500);
 }
 
