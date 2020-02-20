@@ -11,6 +11,18 @@ function initializeApp() {
   dynamicCardGenerator();
   $(".container").on("click", ".card", handleCardClick);
   $("#startDiv").on("click", startDivClick);
+  $("#winDiv").on("click", function () {
+    hideModal();
+    $(".card").addClass("hidden");
+    afterTryAgainClick(1);
+  });
+  $("#tryAgainDiv").on("click", function () {
+    $(".card").addClass("hidden");
+    displayStats(1);
+    dynamicCardGenerator(1);
+    afterTryAgainClick();
+  });
+  $("button.monk-child").on("click", monkChildClick);
 }
 
 function handleCardClick(event) {
@@ -54,23 +66,10 @@ function handleCardClick(event) {
     }
     displayStats();
   }
-  $("#winDiv").on("click", function () {
-    hideModal();
-    $(".card").addClass("hidden");
-    afterTryAgainClick(1);
-  });
-  $("#winDiv").on("click", "#tryAgainDiv", function () {
-    $(".card").addClass("hidden");
-    displayStats(1);
-    dynamicCardGenerator(1);
-    afterTryAgainClick();
-  });
-  $("button.monk-child").on("click", monkChildClick);
 }
 
 function startDivClick() {
   $(".container").off("click", ".card", handleCardClick);
-  dynamicCardGenerator(1);
   $(".card").find(".front").removeClass("matched matched-transition");
   $(".card").removeClass("hidden no-hover");
   $("#startDiv").addClass("hidden");
@@ -109,10 +108,10 @@ function dynamicCardGenerator(reset) {
     randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
     randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
     frontDivElem.addClass("front " + randCardFace);
-    divCardElem.append(frontDivElem);
-    divCardElem.append(backDivElem);
+    divCardElem.append(frontDivElem, backDivElem);
     $("main.container").append(divCardElem);
   }
+  console.log("Cards shuffled! Games Played: ", games_played);
 }
 
 function matchCardTransitionOut(firstCardFront, secondCardFront) {
@@ -163,16 +162,20 @@ function afterTryAgainClick(unhideChild) {
     monkChildDiv.removeClass("hidden");
     return;
   }
-    monkDiv.removeClass("hidden");
-    monkChildDiv.addClass("hidden");
-    setTimeout(function(){
-      monkDiv.addClass("hidden");
-      startDivClick();
-    },3000);
-    return;
+  monkDiv.removeClass("hidden");
+  monkChildDiv.addClass("hidden");
+  // $("#winDiv").off("click");
+  // $("#tryAgainDiv").off("click");
+  // $("button.monk-child").off("click");
+  setTimeout(function(){
+    monkDiv.addClass("hidden");
+    startDivClick();
+  },3000);
+  return;
 }
 
 function monkChildClick() {
+  $(".container").off("click", ".card", handleCardClick);
   $("#afterTryAgainClick").addClass("hidden");
   $(".monk-child").addClass("hidden");
   setTimeout(function(){
