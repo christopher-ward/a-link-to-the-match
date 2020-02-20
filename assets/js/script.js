@@ -11,12 +11,8 @@ function initializeApp() {
   dynamicCardGenerator();
   $(".container").on("click", ".card", handleCardClick);
   $("#startDiv").on("click", startDivClick);
-  $("#winDiv").on("click", function () {
+  $("#winDiv").on("click", "#tryAgainDiv", function () {
     hideModal();
-    $(".card").addClass("hidden");
-    afterTryAgainClick(1);
-  });
-  $("#tryAgainDiv").on("click", function () {
     $(".card").addClass("hidden");
     displayStats(1);
     dynamicCardGenerator(1);
@@ -81,7 +77,7 @@ function startDivClick() {
   }, 1500);
   setTimeout(()=>{
     $(".container").on("click", ".card", handleCardClick);
-  }, 1800);
+  }, 2000);
 }
 
 function dynamicCardGenerator(reset) {
@@ -155,18 +151,11 @@ function displayStats(reset) {
 }
 
 function afterTryAgainClick(unhideChild) {
-  const monkDiv = $("#afterTryAgainClick");
+  const monkDiv = $("#monkContainer");
   const monkChildDiv = $("#monkChild");
-  if (unhideChild) {
-    monkDiv.removeClass("hidden");
-    monkChildDiv.removeClass("hidden");
-    return;
-  }
   monkDiv.removeClass("hidden");
-  monkChildDiv.addClass("hidden");
-  // $("#winDiv").off("click");
-  // $("#tryAgainDiv").off("click");
-  // $("button.monk-child").off("click");
+  monkChildDiv.removeClass("hidden");
+  $(".card").addClass("hidden no-hover");
   setTimeout(function(){
     monkDiv.addClass("hidden");
     startDivClick();
@@ -176,7 +165,7 @@ function afterTryAgainClick(unhideChild) {
 
 function monkChildClick() {
   $(".container").off("click", ".card", handleCardClick);
-  $("#afterTryAgainClick").addClass("hidden");
+  $("#monkContainer").addClass("hidden");
   $(".monk-child").addClass("hidden");
   setTimeout(function(){
     startDivClick();
