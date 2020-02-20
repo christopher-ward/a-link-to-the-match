@@ -156,9 +156,6 @@ function afterTryAgainClick(unhideChild) {
   monkDiv.removeClass("hidden");
   monkChildDiv.removeClass("hidden");
   $(".card").addClass("hidden no-hover");
-  // $("#winDiv").off("click");
-  // $("#tryAgainDiv").off("click");
-  // $("button.monk-child").off("click");
   setTimeout(function(){
     monkDiv.addClass("hidden");
     startDivClick();
