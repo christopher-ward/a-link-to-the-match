@@ -197,7 +197,7 @@ main.container {
 .start-reveal p {
   margin: 0;
 }
-.start-reveal:hover, button.monk-child:hover {
+.start-reveal:hover {
   box-shadow: rgba(237, 237, 153, 0.97) 31px 31px 63px,
   rgba(237, 237, 153, 0.97) -31px 31px 63px,
   rgba(237, 237, 153, 0.97) 31px -31px 63px,
@@ -225,7 +225,6 @@ main.container {
   background-repeat: no-repeat;
   background-position: center;
   display: none;
-  cursor: pointer;
 }
 .monk-div {
   display: flex;
@@ -242,19 +241,6 @@ main.container {
   background-image: url(../images/botw/monk/monk.png);
   background-size: contain;
   background-repeat: no-repeat;
-  cursor: pointer;
-}
-button.monk-child {
-  width: 46%;
-  text-align: center;
-  position: relative;
-  font-size: 1.25rem;
-  top: 100%;
-  left: 25%;
-  background-color: #02c1d3;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
 }
 .try-again {
   position: absolute;
@@ -338,9 +324,6 @@ button.monk-child {
     width: 35%;
     top: 15%;
     left: 10%;
-  }
-  button.monk-child {
-    width: 50%;
   }
   .try-again {
     position: relative;

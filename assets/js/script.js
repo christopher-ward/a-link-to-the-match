@@ -18,7 +18,6 @@ function initializeApp() {
     dynamicCardGenerator(1);
     afterTryAgainClick();
   });
-  $("button.monk-child").on("click", monkChildClick);
 }
 
 function handleCardClick(event) {
@@ -107,7 +106,6 @@ function dynamicCardGenerator(reset) {
     divCardElem.append(frontDivElem, backDivElem);
     $("main.container").append(divCardElem);
   }
-  console.log("Cards shuffled! Games Played: ", games_played);
 }
 
 function matchCardTransitionOut(firstCardFront, secondCardFront) {
@@ -136,7 +134,7 @@ function displayStats(reset) {
   if (reset) {
     matches = 0;
     attempts = 0;
-    accuracyElem.text(0+"%");
+    accuracyElem.text(`0%`);
     attemptsMadeElem.text(attempts);
     return;
   }
@@ -150,7 +148,7 @@ function displayStats(reset) {
   return;
 }
 
-function afterTryAgainClick(unhideChild) {
+function afterTryAgainClick() {
   const monkDiv = $("#monkContainer");
   const monkChildDiv = $("#monkChild");
   monkDiv.removeClass("hidden");
@@ -161,15 +159,6 @@ function afterTryAgainClick(unhideChild) {
     startDivClick();
   },3000);
   return;
-}
-
-function monkChildClick() {
-  $(".container").off("click", ".card", handleCardClick);
-  $("#monkContainer").addClass("hidden");
-  $(".monk-child").addClass("hidden");
-  setTimeout(function(){
-    startDivClick();
-  }, 2000);
 }
 
 function winConditionModal() {
