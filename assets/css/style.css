@@ -154,6 +154,7 @@ main.container {
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
+  user-select: none;
 }
 .anim-typewriter {
   animation: typewriter 4s steps(44) 1s 1 normal both,
@@ -170,6 +171,15 @@ main.container {
 @keyframes blinkTextCursor {
   from{border-right-color: rgba(255,255,255,.75);}
   to{border-right-color: transparent;}
+}
+.see-through {
+  opacity: 0;
+}
+.fade-in {
+  transition: opacity 3s ease-in-out;
+}
+.in {
+  opacity: 1;
 }
   /**********************/
  /* Modals and Pop-Ups */
@@ -224,7 +234,6 @@ main.container {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  display: none;
 }
 .monk-div {
   display: flex;
@@ -252,12 +261,9 @@ main.container {
   border: 3px solid rgb(2, 193, 212);
   border-radius: 32px;
   padding: 5px;
-  display: none;
+  /* display: none; */
   cursor: pointer;
   user-select: none;
-}
-.see-through {
-  opacity: 0;
 }
 .hidden {
   display: none;
