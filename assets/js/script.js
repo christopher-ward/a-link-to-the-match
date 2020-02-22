@@ -21,14 +21,14 @@ function initializeApp() {
   dynamicCardGenerator(cardFaceArray);
   $(".container").on("click", ".card", handleCardClick);
   $("#startDiv").on("click", startDivClick);
-  $("#winDiv").on("click", "#tryAgainDiv", function () {
+  $("#winDiv").on("click", "#tryAgainDiv", () => {
     $("#winDiv").addClass("hidden");
     newGameTransition();
     $("#winDiv").removeClass("fade-in in");
   });
 }
 
-function handleCardClick(event) {
+const handleCardClick = (event) => {
   let currentCard = $(event.currentTarget);
   currentCard.addClass("flipped");
   if (currentCard.find(".front").hasClass("card-selected")) {
@@ -48,7 +48,7 @@ function handleCardClick(event) {
     if (firstClickImage != secondClickImage) {
       attempts++;
       $(".container").off("click", ".card", handleCardClick);
-      setTimeout(function () {
+      setTimeout(() => {
         firstCardClicked.removeClass("flipped");
         secondCardClicked.removeClass("flipped");
         firstCardFront.removeClass("card-selected");
@@ -74,7 +74,7 @@ function handleCardClick(event) {
   }
 }
 
-function startDivClick() {
+const startDivClick = () => {
   $(".container").off("click", ".card", handleCardClick);
   $(".card").find(".front").removeClass("matched matched-transition");
   $(".card").removeClass("hidden no-hover");
@@ -91,14 +91,14 @@ function startDivClick() {
   return;
 }
 
-function winConditionModal() {
+const winConditionModal = () => {
   $("#winDiv").removeClass("hidden");
   setTimeout(() => {
     $("#winDiv").addClass("fade-in in");
   }, 1500)
 }
 
-function dynamicCardGenerator(cardFaceArray) {
+const dynamicCardGenerator = (cardFaceArray) => {
   let cardArray = [...cardFaceArray];
   let randCardFaceIndex = null;
   let randCardFace = null;
@@ -115,7 +115,7 @@ function dynamicCardGenerator(cardFaceArray) {
   }
 }
 
-function newGameTransition() {
+const newGameTransition = () => {
   const monkDiv = $("#monkContainer");
   $(".front").addClass("matched-transition matched see-through");
   setTimeout(() => {
@@ -145,7 +145,7 @@ const resetAfterShuffle = () => {
 
 const monkOut = () => {
   const monkDiv = $("#monkContainer");
-  setTimeout(function () {
+  setTimeout(() => {
     monkDiv.removeClass("fade-in in see-through");
     monkDiv.addClass("matched-transition matched");
     setTimeout(() => {
@@ -158,7 +158,7 @@ const monkOut = () => {
   }, 5000);
 }
 
-function calculateAccuracy() {
+const calculateAccuracy = () => {
   let accuracy = ((matches / (matches + attempts)) * 100);
   if (!Number.isInteger(accuracy)) {
     accuracy = accuracy.toFixed(2)
@@ -167,7 +167,7 @@ function calculateAccuracy() {
   return percentAccuracy;
 }
 
-function displayStats(reset) {
+const displayStats = (reset) => {
   let aside = $("aside");
   let gamesPlayedElem = aside.find(".games span");
   let attemptsMadeElem = aside.find(".attempts span");
