@@ -261,7 +261,6 @@ main.container {
   border: 3px solid rgb(2, 193, 212);
   border-radius: 32px;
   padding: 5px;
-  /* display: none; */
   cursor: pointer;
   user-select: none;
 }

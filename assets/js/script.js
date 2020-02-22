@@ -22,7 +22,7 @@ function initializeApp() {
   $(".container").on("click", ".card", handleCardClick);
   $("#startDiv").on("click", startDivClick);
   $("#winDiv").on("click", "#tryAgainDiv", function () {
-    hideModal();
+    $("#winDiv").addClass("hidden");
     newGameTransition();
     $("#winDiv").removeClass("fade-in in");
   });
@@ -76,45 +76,18 @@ function handleCardClick(event) {
 
 function startDivClick() {
   $(".container").off("click", ".card", handleCardClick);
+  $(".card").find(".front").removeClass("matched matched-transition");
   $(".card").removeClass("hidden no-hover");
   $(".card").addClass("flipped");
   $("#startDiv").addClass("hidden");
   $(".start-shadow").removeClass("hidden");
-  setTimeout(function () {
+  setTimeout(() => {
     $(".card").removeClass("flipped");
     $(".start-shadow").addClass("hidden");
   }, 1500);
   setTimeout(()=>{
     $(".container").on("click", ".card", handleCardClick);
   }, 2000);
-}
-
-function dynamicCardGenerator(cardFaceArray) {
-  let randCardFaceIndex = null;
-  let randCardFace = null;
-  $("main.container").html("");
-  while (cardFaceArray.length > 0) {
-    let divCardElem = $("<div>").addClass("card");
-    let frontDivElem = $("<div>");
-    let backDivElem = $("<div>").addClass("back tri-force");
-    randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
-    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
-    frontDivElem.addClass("front " + randCardFace);
-    divCardElem.append(frontDivElem, backDivElem);
-    $("main.container").append(divCardElem);
-  }
-}
-
-function newGameTransition() {
-  const monkDiv = $("#monkContainer");
-  $(".front").addClass("matched-transition matched");
-  setTimeout(() => {
-    monkDiv.removeClass("hidden");
-    setTimeout(() => {
-      monkDiv.addClass("fade-in in");
-    }, 1500)
-    monkOut();
-  }, 3000);
   return;
 }
 
@@ -125,20 +98,62 @@ function winConditionModal() {
   }, 1500)
 }
 
-function hideModal() {
-  $("#winDiv").hide();
-  $("#tryAgainDiv").hide();
+function dynamicCardGenerator(cardFaceArray) {
+  let cardArray = [...cardFaceArray];
+  let randCardFaceIndex = null;
+  let randCardFace = null;
+  $("main.container").html("");
+  while (cardArray.length > 0) {
+    let divCardElem = $("<div>").addClass("card");
+    let frontDivElem = $("<div>");
+    let backDivElem = $("<div>").addClass("back tri-force");
+    randCardFaceIndex = Math.floor(Math.random() * cardArray.length);
+    randCardFace = cardArray.splice(randCardFaceIndex, 1);
+    frontDivElem.addClass("front " + randCardFace);
+    divCardElem.append(frontDivElem, backDivElem);
+    $("main.container").append(divCardElem);
+  }
+}
+
+function newGameTransition() {
+  const monkDiv = $("#monkContainer");
+  $(".front").addClass("matched-transition matched see-through");
+  setTimeout(() => {
+    monkDiv.removeClass("hidden");
+    setTimeout(() => {
+      monkDiv.addClass("fade-in in");
+    }, 1500)
+    monkOut();
+  }, 3000);
+  return;
+}
+
+const resetAfterShuffle = () => {
+  $(".container").off("click", ".card", handleCardClick);
+  $(".card").find(".front").removeClass("matched matched-transition");
+  $(".card").removeClass("hidden no-hover");
+  $(".card").addClass("flipped");
+  $(".start-shadow").removeClass("hidden");
+  setTimeout(() => {
+    $(".card").removeClass("flipped");
+    $(".start-shadow").addClass("hidden");
+  }, 1500);
+  setTimeout(() => {
+    $(".container").on("click", ".card", handleCardClick);
+  }, 2000);
 }
 
 const monkOut = () => {
   const monkDiv = $("#monkContainer");
   setTimeout(function () {
+    monkDiv.removeClass("fade-in in see-through");
     monkDiv.addClass("matched-transition matched");
     setTimeout(() => {
-      monkDiv.addClass("hidden");
+      monkDiv.addClass("see-through hidden");
+      monkDiv.removeClass("matched-transition matched")
       displayStats(1);
       dynamicCardGenerator(cardFaceArray);
-      startDivClick();
+      resetAfterShuffle();
     }, 3000);
   }, 5000);
 }
