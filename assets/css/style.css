@@ -141,7 +141,7 @@ main.container {
 }
 /* Card match */
 .matched-transition {
-  transition: opacity 3s ease-in-out;
+  transition: opacity 2.5s ease-in-out;
 }
 .matched {
   opacity: 0;
@@ -176,7 +176,7 @@ main.container {
   opacity: 0;
 }
 .fade-in {
-  transition: opacity 3s ease-in-out;
+  transition: opacity 2.5s ease-in-out;
 }
 .in {
   opacity: 1;
