@@ -1,50 +1,35 @@
 $(document).ready(initializeApp);
 
-var firstCardClicked = null;
-var secondCardClicked = null;
-var matches = null;
-var maxMatches = 9;
-var attempts = null;
-var games_played = null;
+let firstCardClicked = null;
+let secondCardClicked = null;
+let matches = null;
+let attempts = null;
+let games_played = null;
+const maxMatches = 9;
+const cardFaceArray = [
+  "black-bokoblin", "black-bokoblin",
+  "red-rupee", "red-rupee",
+  "blue-chuchu", "blue-chuchu",
+  "golden-bokoblin", "golden-bokoblin",
+  "gold-rupee", "gold-rupee",
+  "purple-rupee", "purple-rupee",
+  "green-rupee", "green-rupee",
+  "blue-rupee", "blue-rupee",
+  "blue-maned-lynel", "blue-maned-lynel" ];
 
 function initializeApp() {
-  dynamicCardGenerator();
+  dynamicCardGenerator(cardFaceArray);
   $(".container").on("click", ".card", handleCardClick);
   $("#startDiv").on("click", startDivClick);
+  $("#winDiv").on("click", "#tryAgainDiv", () => {
+    $("#winDiv").addClass("hidden");
+    newGameTransition();
+    $("#winDiv").removeClass("fade-in in");
+  });
 }
 
-function dynamicCardGenerator(reset) {
-  var cardFaceArray = [
-    "black-bokoblin", "black-bokoblin",
-    "red-rupee", "red-rupee",
-    "blue-chuchu", "blue-chuchu",
-    "golden-bokoblin", "golden-bokoblin",
-    "gold-rupee", "gold-rupee",
-    "purple-rupee", "purple-rupee",
-    "green-rupee", "green-rupee",
-    "blue-rupee", "blue-rupee",
-    "blue-maned-lynel", "blue-maned-lynel"];
-  var randCardFaceIndex = null;
-  var randCardFace = null;
-  if (reset) {
-    $(".container").html("");
-    displayStats(1);
-  }
-  while (cardFaceArray.length > 0) {
-    var divCardElem = $("<div>").addClass("card");
-    var frontDivElem = $("<div>");
-    var backDivElem = $("<div>").addClass("back tri-force");
-    randCardFaceIndex = Math.floor(Math.random() * cardFaceArray.length);
-    randCardFace = cardFaceArray.splice(randCardFaceIndex, 1);
-    frontDivElem.addClass("front " + randCardFace);
-    divCardElem.append(frontDivElem);
-    divCardElem.append(backDivElem);
-    $("div .container").append(divCardElem);
-  }
-}
-
-function handleCardClick(event) {
-  var currentCard = $(event.currentTarget);
+const handleCardClick = (event) => {
+  let currentCard = $(event.currentTarget);
   currentCard.addClass("flipped");
   if (currentCard.find(".front").hasClass("card-selected")) {
     return;
@@ -56,14 +41,14 @@ function handleCardClick(event) {
     secondCardClicked = currentCard;
   }
   if (secondCardClicked) {
-    var firstCardFront = firstCardClicked.find(".front");
-    var secondCardFront = secondCardClicked.find(".front");
-    var firstClickImage = firstCardFront.css("background-image");
-    var secondClickImage = secondCardFront.css("background-image");
+    let firstCardFront = firstCardClicked.find(".front");
+    let secondCardFront = secondCardClicked.find(".front");
+    let firstClickImage = firstCardFront.css("background-image");
+    let secondClickImage = secondCardFront.css("background-image");
     if (firstClickImage != secondClickImage) {
       attempts++;
       $(".container").off("click", ".card", handleCardClick);
-      setTimeout(function () {
+      setTimeout(() => {
         firstCardClicked.removeClass("flipped");
         secondCardClicked.removeClass("flipped");
         firstCardFront.removeClass("card-selected");
@@ -74,7 +59,10 @@ function handleCardClick(event) {
       }, 1000);
     } else {
       matches++;
-      matchCardTransitionOut(firstCardFront, secondCardFront);
+      firstCardFront.removeClass("card-selected");
+      secondCardFront.removeClass("card-selected");
+      firstCardFront.parent().addClass("no-hover");
+      secondCardFront.parent().addClass("no-hover");
       firstCardClicked = null;
       secondCardClicked = null;
       if (matches === maxMatches) {
@@ -84,47 +72,155 @@ function handleCardClick(event) {
     }
     displayStats();
   }
-  $("#winDiv").on("click", function () {
-    hideModal();
-    $(".card").addClass("hidden");
-    afterTryAgainClick(1);
-  });
-  $("#winDiv").on("click", "#tryAgainDiv", function () {
-    $(".card").addClass("hidden");
-    displayStats(1);
-    dynamicCardGenerator(1);
-    afterTryAgainClick();
-  });
-  $("button.monk-child").on("click", monkChildClick);
 }
 
-function matchCardTransitionOut(firstCardFront, secondCardFront) {
-  firstCardFront.parent().addClass("no-hover");
-  secondCardFront.parent().addClass("no-hover");
-  firstCardFront.addClass("matched-transition matched");
-  secondCardFront.addClass("matched-transition matched");
+const startDivClick = () => {
+  $(".container").off("click", ".card", handleCardClick);
+  $(".card").find(".front").removeClass("matched matched-transition");
+  $(".card").removeClass("hidden no-hover");
+  $(".card").addClass("flipped");
+  $("#startDiv").addClass("hidden");
+  $(".start-shadow").removeClass("hidden");
+  setTimeout(() => {
+    $(".card").removeClass("flipped");
+    $(".start-shadow").addClass("hidden");
+  }, 1500);
+  setTimeout(()=>{
+    $(".container").on("click", ".card", handleCardClick);
+  }, 2000);
   return;
 }
 
-function calculateAccuracy() {
-  var accuracy = ((matches / (matches + attempts)) * 100);
+const winConditionModal = () => {
+  $("#winDiv").removeClass("hidden");
+  setTimeout(() => {
+    $("#winDiv").addClass("fade-in in");
+  }, 100)
+}
+
+const dynamicCardGenerator = (cardFaceArray) => {
+  let cardArray = [...cardFaceArray];
+  let randCardFaceIndex = null;
+  let randCardFace = null;
+  $("main.container").html("");
+  while (cardArray.length > 0) {
+    let divCardElem = $("<div>").addClass("card");
+    let frontDivElem = $("<div>");
+    let backDivElem = $("<div>").addClass("back tri-force");
+    randCardFaceIndex = Math.floor(Math.random() * cardArray.length);
+    randCardFace = cardArray.splice(randCardFaceIndex, 1);
+    frontDivElem.addClass("front " + randCardFace);
+    divCardElem.append(frontDivElem, backDivElem);
+    $("main.container").append(divCardElem);
+  }
+}
+
+const newGameTransition = () => {
+  const monkDiv = $("#monkContainer");
+  $(".front").addClass("matched-transition matched");
+  setTimeout(() => {
+    monkDiv.removeClass("hidden");
+    setTimeout(() => {
+      monkDiv.addClass("fade-in in");
+    }, 1500)
+    setTimeout(() => {
+      monkOut();
+    }, 1)
+  }, 2000);
+  return;
+}
+
+const monkOut = () => {
+  const monkDiv = $("#monkContainer");
+  setTimeout(() => {
+    monkDiv.removeClass("fade-in in see-through");
+    monkDiv.addClass("matched-transition matched");
+    setTimeout(() => {
+      monkDiv.addClass("see-through hidden");
+      monkDiv.removeClass("matched-transition matched")
+      displayStats(1);
+      resetShuffle();
+    }, 3000);
+  }, 5000);
+}
+
+const resetShuffle = async () => {
+  try {
+    const first = await shuffle();
+    const second = await cardsFadeIn();
+    const third = await cardsReveal();
+    const fourth = await cardsHideAndBegin();
+    const fifth = await hideShadow();
+  }
+  catch (err) {
+    console.error("Error in resetSuffle:", err);
+  }
+}
+
+const shuffle = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("first")
+      dynamicCardGenerator(cardFaceArray)
+      $(".card").addClass("no-hover see-through")
+      $(".start-shadow").removeClass("hidden")
+    }, 500);
+  })
+}
+const cardsFadeIn = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("second")
+      $(".card").addClass("fade-in in");
+    }, 500);
+  })
+}
+const cardsReveal = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("third")
+      $(".card").removeClass("fade-in");
+      $(".card").addClass("flipped");
+    }, 3000);
+  })
+}
+const cardsHideAndBegin = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("fourth")
+      $(".card").removeClass("flipped");
+    }, 2500);
+  })
+}
+const hideShadow = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("fifth")
+      $(".start-shadow").addClass("hidden");
+      $(".card").removeClass("no-hover see-through");
+    }, 100);
+  })
+}
+
+const calculateAccuracy = () => {
+  let accuracy = ((matches / (matches + attempts)) * 100);
   if (!Number.isInteger(accuracy)) {
     accuracy = accuracy.toFixed(2)
   }
-  var percentAccuracy = accuracy + "%";
+  let percentAccuracy = `${accuracy}%`;
   return percentAccuracy;
 }
 
-function displayStats(reset) {
-  var aside = $("aside");
-  var gamesPlayedElem = aside.find(".games span");
-  var attemptsMadeElem = aside.find(".attempts span");
-  var accuracyElem = aside.find(".accuracy span");
-  var calcAccuracy = calculateAccuracy();
+const displayStats = (reset) => {
+  let aside = $("aside");
+  let gamesPlayedElem = aside.find(".games span");
+  let attemptsMadeElem = aside.find(".attempts span");
+  let accuracyElem = aside.find(".accuracy span");
+  let calcAccuracy = calculateAccuracy();
   if (reset) {
     matches = 0;
     attempts = 0;
-    accuracyElem.text(0+"%");
+    accuracyElem.text(`0%`);
     attemptsMadeElem.text(attempts);
     return;
   }
@@ -136,53 +232,4 @@ function displayStats(reset) {
   }
   accuracyElem.text(calcAccuracy);
   return;
-}
-
-function afterTryAgainClick(unhideChild) {
-  var monkDiv = $("#afterTryAgainClick");
-  var monkChildDiv = $("#monkChild");
-  if (unhideChild) {
-    monkDiv.removeClass("hidden");
-    monkChildDiv.removeClass("hidden");
-    return;
-  }
-    monkDiv.removeClass("hidden");
-    monkChildDiv.addClass("hidden");
-    setTimeout(function(){
-      monkDiv.addClass("hidden");
-      startDivClick();
-    },3000);
-    return;
-}
-
-function monkChildClick() {
-  $("#afterTryAgainClick").addClass("hidden");
-  $(".monk-child").addClass("hidden");
-  setTimeout(function(){
-    startDivClick();
-  }, 2000);
-}
-
-function startDivClick() {
-  dynamicCardGenerator(1);
-  $(".card").find(".front").removeClass("matched matched-transition");
-  $(".card").removeClass("hidden no-hover");
-  $("#startDiv").addClass("hidden");
-  $(".card").addClass("flipped");
-  $(".start-shadow").addClass("hidden");
-  setTimeout(function() {
-    $(".card").removeClass("flipped");
-  }, 1500);
-}
-
-function winConditionModal() {
-  setTimeout(function() {
-    $("#tryAgainDiv").show();
-    $("#winDiv").show();
-  }, 3000);
-}
-
-function hideModal() {
-  $("#winDiv").hide();
-  $("#tryAgainDiv").hide();
 }
