@@ -20,17 +20,28 @@ h1, h2 {
 }
 .game-area {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   height: 78%;
 }
 aside {
-  width: 17%;
+  display: flex;
+  flex-direction: column;
+  min-width: 313px;
+  height: 556px;
   text-align: center;
+  align-self: center;
+  margin: 0 1.5%;
   background-color: rgba(59, 155, 162, 0.4);
   border-radius: 10px;
   user-select: none;
+  background-image: url(../images/botw/slate/vertical-slate.jpg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 aside h2.stats-head {
+  font-size: 2rem;
+  margin: 34px 0 5px;
   color: #fffc02;
 }
 aside .stats {
@@ -38,10 +49,11 @@ aside .stats {
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  margin: 8% 10px;
+  margin: 13px 44px;
   background-color: rgba(2, 6, 33, 0.8);
   color: #e5ac1b;
-  height: 10%;
+  height: 40px;
+  border-radius: 40px;
 }
 main.container {
   display: flex;
@@ -51,7 +63,7 @@ main.container {
 .card {
   position: relative;
   margin: 0.25%;
-  width: 15%;
+  width: 16%;
   transform-style: preserve-3d;
   transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1);
   cursor: pointer;
