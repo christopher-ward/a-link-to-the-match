@@ -3,9 +3,9 @@ $(document).ready(initializeApp);
 let firstCardClicked = null;
 let secondCardClicked = null;
 let matches = null;
-const maxMatches = 9;
 let attempts = null;
 let games_played = null;
+const maxMatches = 9;
 const cardFaceArray = [
   "black-bokoblin", "black-bokoblin",
   "red-rupee", "red-rupee",
@@ -15,7 +15,7 @@ const cardFaceArray = [
   "purple-rupee", "purple-rupee",
   "green-rupee", "green-rupee",
   "blue-rupee", "blue-rupee",
-  "blue-maned-lynel", "blue-maned-lynel"];
+  "blue-maned-lynel", "blue-maned-lynel" ];
 
 function initializeApp() {
   dynamicCardGenerator(cardFaceArray);
@@ -95,7 +95,7 @@ const winConditionModal = () => {
   $("#winDiv").removeClass("hidden");
   setTimeout(() => {
     $("#winDiv").addClass("fade-in in");
-  }, 1500)
+  }, 100)
 }
 
 const dynamicCardGenerator = (cardFaceArray) => {
@@ -117,30 +117,17 @@ const dynamicCardGenerator = (cardFaceArray) => {
 
 const newGameTransition = () => {
   const monkDiv = $("#monkContainer");
-  $(".front").addClass("matched-transition matched see-through");
+  $(".front").addClass("matched-transition matched");
   setTimeout(() => {
     monkDiv.removeClass("hidden");
     setTimeout(() => {
       monkDiv.addClass("fade-in in");
     }, 1500)
-    monkOut();
-  }, 3000);
-  return;
-}
-
-const resetAfterShuffle = () => {
-  $(".container").off("click", ".card", handleCardClick);
-  $(".card").find(".front").removeClass("matched matched-transition");
-  $(".card").removeClass("hidden no-hover");
-  $(".card").addClass("flipped");
-  $(".start-shadow").removeClass("hidden");
-  setTimeout(() => {
-    $(".card").removeClass("flipped");
-    $(".start-shadow").addClass("hidden");
-  }, 1500);
-  setTimeout(() => {
-    $(".container").on("click", ".card", handleCardClick);
+    setTimeout(() => {
+      monkOut();
+    }, 1)
   }, 2000);
+  return;
 }
 
 const monkOut = () => {
@@ -152,10 +139,67 @@ const monkOut = () => {
       monkDiv.addClass("see-through hidden");
       monkDiv.removeClass("matched-transition matched")
       displayStats(1);
-      dynamicCardGenerator(cardFaceArray);
-      resetAfterShuffle();
+      resetShuffle();
     }, 3000);
   }, 5000);
+}
+
+const resetShuffle = async () => {
+  try {
+    const first = await shuffle();
+    const second = await cardsFadeIn();
+    const third = await cardsReveal();
+    const fourth = await cardsHideAndBegin();
+    const fifth = await hideShadow();
+  }
+  catch (err) {
+    console.error("Error in resetSuffle:", err);
+  }
+}
+
+const shuffle = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("first")
+      dynamicCardGenerator(cardFaceArray)
+      $(".card").addClass("no-hover see-through")
+      $(".start-shadow").removeClass("hidden")
+    }, 500);
+  })
+}
+const cardsFadeIn = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("second")
+      $(".card").addClass("fade-in in");
+    }, 500);
+  })
+}
+const cardsReveal = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("third")
+      $(".card").removeClass("fade-in");
+      $(".card").addClass("flipped");
+    }, 3000);
+  })
+}
+const cardsHideAndBegin = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("fourth")
+      $(".card").removeClass("flipped");
+    }, 2500);
+  })
+}
+const hideShadow = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("fifth")
+      $(".start-shadow").addClass("hidden");
+      $(".card").removeClass("no-hover see-through");
+    }, 100);
+  })
 }
 
 const calculateAccuracy = () => {
