@@ -2,7 +2,7 @@ body {
   font-family: 'Spectral', serif;
   height: 100vh;
   margin: 0;
-  background-image: url("../images/botw/the-legend-of-zelda-breath-of-the-wild-wallpaper-hd.jpg");
+  background-image: url(../images/botw/the-legend-of-zelda-breath-of-the-wild-wallpaper-hd.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -34,10 +34,7 @@ aside {
   background-color: rgba(59, 155, 162, 0.4);
   border-radius: 10px;
   user-select: none;
-  background-image: url(../images/botw/slate/vertical-slate.jpg);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url(../images/botw/slate/vertical-slate.jpg) center/contain no-repeat rgba(59, 155, 162, 0.4);
 }
 aside h2.stats-head {
   font-size: 2rem;
@@ -55,8 +52,12 @@ aside .stats {
   height: 40px;
   border-radius: 40px;
 }
+.stats.mobile {
+  display: none;
+}
 main.container {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   width: 75%;
 }
@@ -201,8 +202,8 @@ main.container {
   flex-direction: column;
   position: absolute;
   font-size: 2.25rem;
-  left: 33%;
-  bottom: 32%;
+  left: 24.5%;
+  top: 28.5%;
   width: 50%;
   height: 35%;
   background-color: rgba(39, 240, 255, 0.68);
@@ -210,11 +211,12 @@ main.container {
   background-position: center;
   background-blend-mode: soft-light;
   color: rgb(255, 252, 2);
-  text-shadow: 2px 2px black, -2px -2px black, -2px 2px black, 2px -2px black;
+  text-shadow: -2px 1px black, -1px -1px black, 2px 1px black, 1px -1px black;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
   cursor: pointer;
+  z-index: 1;
 }
 .start-reveal p {
   margin: 0;
@@ -225,7 +227,7 @@ main.container {
   rgba(237, 237, 153, 0.97) 31px -31px 63px,
   rgba(237, 237, 153, 0.97) -31px -31px 63px;
   border-radius: 50px;
-  transform: scale(1.025);
+  transform: scale(1.025, 1.025);
   background-color: rgba(39, 124, 255, 0.7);
 }
 .start-shadow {
@@ -247,18 +249,15 @@ main.container {
   background-repeat: no-repeat;
   background-position: center;
 }
-.monk-div {
-  display: flex;
-}
 .monk {
-  display: flex;
   position: absolute;
-  height: 52%;
+  /* height: 52%; */
   min-height: 450px;
   min-width: 365px;
-  width: 23%;
-  top: 21%;
-  left: 26%;
+  /* width: 23%; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-image: url(../images/botw/monk/monk.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -266,13 +265,14 @@ main.container {
 .try-again {
   position: absolute;
   left: 28%;
-  top: 14%;
-  font-size: 2rem;
+  top: 73px;
+  width: fit-content;
+  font-size: 1.8rem;
   color: #02c1d4;
-  background-color: rgba(41, 64, 59, 0.8);
+  background-color: rgba(41, 64, 59, 0.9);
   border: 3px solid rgb(2, 193, 212);
   border-radius: 32px;
-  padding: 5px;
+  padding: 5px 19px;
   cursor: pointer;
   user-select: none;
 }
@@ -286,6 +286,7 @@ main.container {
     flex-direction: column;
     height: 100vh;
     width: auto;
+    background-position: center;
   }
   header {
     display: none;
@@ -297,27 +298,42 @@ main.container {
     height: 96%;
   }
   aside {
-    display: flex;
     align-items: center;
     justify-content: center;
-    width: 95%;
+     width: 408px;
+    height: 297px;
+    background: url(../images/botw/slate/horizontal-slate.jpg)
+      center/100%
+      rgba(59, 155, 162, 0.4);
     text-align: unset;
     font-size: 2rem;
+    margin: 16px;
   }
   aside .stats {
     display: flex;
     font-size: 2.0rem;
     background-color: rgba(2, 6, 33, 0.8);
     color: #e5ac1b;
-    margin: 0 1%;
+    margin: 0 1% 5px;
     padding: 0 1%;
-    height: 66%;
+    /* height: 66%; */
   }
-  aside .stats-head {
+  aside .stats.mobile {
+    display: flex;
+    /* margin-bottom: 5px; */
+    font-size: 1.85rem;
+  }
+  aside .stats-head, aside .stats span {
     margin: 0;
   }
-  aside .stats span {
+  aside .stats.desk {
+    display: none;
+  }
+  aside h2.stats-head {
     margin: 0;
+  }
+  aside .stats .stats-data {
+    margin-left: 8px;
   }
   main.container {
     justify-content: center;
@@ -327,20 +343,21 @@ main.container {
   .start-reveal {
     width: 75%;
     left: 12.5%;
-    font-size: 1.75rem;
+    font-size: 2.5rem;
   }
   .win-message {
     left: 23%;
   }
   .win-container {
-    width: 65%;
+    width: 74%;
     transform: translate(-50%, -50%);
   }
   .monk {
     height: 58%;
     width: 35%;
-    top: 15%;
-    left: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .try-again {
     position: relative;
@@ -348,5 +365,122 @@ main.container {
     left: 26%;
     width: 43%;
     text-align: center;
+  }
+}
+@media only screen and (max-height: 1150px) and (orientation: landscape) {
+  /* aside {
+    width: 450px;
+  } */
+  .win-container {
+    transform: translate(-50%, -50%);
+  }
+  .try-again {
+    left: 0;
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  body {
+    /* background-size: 100vh; */
+  }
+  .mobile-container {
+    display: flex;
+    margin: 7px 0px 3px;
+  }
+  aside {
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 342px;
+    min-width: unset;
+    height: 224px;
+    margin: 0;
+    margin-top: 14px;
+    background: url(../images/botw/slate/horizontal-slate.jpg)
+      center/94%
+      rgba(59, 155, 162, 0.4);
+  }
+  aside h2.stats-head {
+    font-size: 1.5rem;
+    margin-left: 5px;
+  }
+  aside .stats .stats-data {
+    margin-left: 2px;
+  }
+  aside .stats.mobile {
+    flex-direction: column;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    justify-content: flex-end;
+    height: 53px;
+    width: 89px;
+    margin: 0;
+    padding: 0;
+  }
+  .start-reveal {
+    width: 83%;
+    left: 8.5%;
+    font-size: 1.4rem;
+    background-size: 115%;
+  }
+  main.container {
+    align-items: center;
+    margin-top: 10px;
+  }
+  .card {
+    height: 16.5%;
+    width: 28%;
+    margin: 0.45%;
+  }
+  .win-container {
+    width: 84%;
+    transform: translate(-50%, -41%);
+  }
+  .try-again {
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+  .game-area {
+    flex-direction: row;
+  }
+  aside {
+    min-width: unset;
+    width: 201px;
+    height: 272px;
+    background: url(../images/botw/slate/vertical-slate.jpg)
+      center/100%
+      rgba(59, 151, 162, 0.4);
+    margin: 0;
+  }
+  aside h2.stats-head {
+    font-size: 1.5rem;
+  }
+  /* .mobile-container {
+    width: 50%;
+  } */
+  aside .stats.mobile {
+    height: 32px;
+    font-size: 1.155rem;
+    margin: 7% 0;
+  }
+  .start-reveal {
+    font-size: 1.5rem;
+    height: 45%;
+    background-size: 100%;
+  }
+  .win-container {
+    width: 50%;
+  }
+  .try-again {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 350px) {
+  body {
+    height: 104.25vh;
+    background-size: cover;
+  }
+  .start-reveal {
+    font-size: 1.25rem;
   }
 }
