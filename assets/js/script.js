@@ -18,7 +18,7 @@ const cardFaceArray = [
   "blue-maned-lynel", "blue-maned-lynel" ];
 
 function initializeApp() {
-  dynamicCardGenerator(cardFaceArray);
+  dynamicCardGenerator(cardFaceArray, 1);
   $(".container").on("click", ".card", handleCardClick);
   $("#startDiv").on("click", startDivClick);
   $("#winDiv").on("click", "#tryAgainDiv", () => {
@@ -98,21 +98,33 @@ const winConditionModal = () => {
   }, 100)
 }
 
-const dynamicCardGenerator = (cardFaceArray) => {
+const dynamicCardGenerator = (cardFaceArray, first) => {
   let cardArray = [...cardFaceArray];
   let randCardFaceIndex = null;
   let randCardFace = null;
-  $("main.container").html("");
+  let $main = $("main.container");
+  $main.html("");
   while (cardArray.length > 0) {
-    let divCardElem = $("<div>").addClass("card");
-    let frontDivElem = $("<div>");
-    let backDivElem = $("<div>").addClass("back tri-force");
+    let $divCardElem = $("<div>").addClass("card");
+    let $frontDivElem = $("<div>");
+    let $backDivElem = $("<div>").addClass("back tri-force");
     randCardFaceIndex = Math.floor(Math.random() * cardArray.length);
     randCardFace = cardArray.splice(randCardFaceIndex, 1);
-    frontDivElem.addClass("front " + randCardFace);
-    divCardElem.append(frontDivElem, backDivElem);
-    $("main.container").append(divCardElem);
+    $frontDivElem.addClass("front " + randCardFace);
+    $divCardElem.append($frontDivElem, $backDivElem);
+    $main.append($divCardElem);
   }
+  let $monkContainer = $("<div>").attr('id', 'monkContainer').addClass("monk hidden see-through");
+  if (first) {
+    let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
+    $startDiv
+      .append(
+        $("<p>").addClass(" anim-typewriter border-right-type-none type-line").text("In the name of Goddess Hylia"),
+        $("<p>").addClass(" anim-typewriter-2 border-right-type-none type-line").text("I offer you this trial.")
+      );
+    $main.append($monkContainer, $startDiv);
+  }
+  $main.append($monkContainer);
 }
 
 const newGameTransition = () => {
