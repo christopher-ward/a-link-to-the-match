@@ -35,6 +35,7 @@ const handleCardClick = (event) => {
     return;
   }
   currentCard.find(".front").addClass("card-selected");
+  currentCard.addClass('no-hover');
   if (firstCardClicked === null) {
     firstCardClicked = currentCard;
   } else {
@@ -49,8 +50,8 @@ const handleCardClick = (event) => {
       attempts++;
       $(".container").off("click", ".card", handleCardClick);
       setTimeout(() => {
-        firstCardClicked.removeClass("flipped");
-        secondCardClicked.removeClass("flipped");
+        firstCardClicked.removeClass("flipped no-hover");
+        secondCardClicked.removeClass("flipped no-hover");
         firstCardFront.removeClass("card-selected");
         secondCardFront.removeClass("card-selected");
         firstCardClicked = null;
