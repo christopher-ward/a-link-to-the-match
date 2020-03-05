@@ -255,10 +255,8 @@ main.container {
 }
 .monk {
   position: absolute;
-  /* height: 52%; */
   min-height: 450px;
   min-width: 365px;
-  /* width: 23%; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -326,11 +324,9 @@ main.container {
     color: #e5ac1b;
     margin: 0 1% 5px;
     padding: 0 1%;
-    /* height: 66%; */
   }
   aside .stats.mobile {
     display: flex;
-    /* margin-bottom: 5px; */
     font-size: 1.85rem;
   }
   aside .stats-head, aside .stats span {
@@ -400,9 +396,6 @@ main.container {
   aside h2.stats-head {
     font-size: 1.5rem;
   }
-  /* .mobile-container {
-    width: 50%;
-  } */
   aside .stats.mobile {
     height: 32px;
     font-size: 1.155rem;
