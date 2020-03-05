@@ -281,6 +281,11 @@ main.container {
   display: none;
 }
 
+@media (hover: none) {
+   .card:hover {
+      box-shadow: unset;
+   }
+}
 @media only screen and (max-width: 1150px) {
   body {
     display: flex;
