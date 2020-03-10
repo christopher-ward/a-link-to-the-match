@@ -66,6 +66,7 @@ main.container {
   margin: 0.25%;
   width: 16%;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1);
   cursor: pointer;
 }
@@ -147,6 +148,7 @@ main.container {
 .front {
   background-color: #1b3f3f;
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   border-radius: 10px;
 }
 .back, .front {
@@ -155,6 +157,7 @@ main.container {
 }
 .flipped {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 /* Card match */
 .matched-transition {
@@ -232,6 +235,7 @@ main.container {
   rgba(237, 237, 153, 0.97) -31px -31px 63px;
   border-radius: 50px;
   transform: scale(1.025, 1.025);
+  -webkit-transform: scale(1.025, 1.025);
   background-color: rgba(39, 124, 255, 0.7);
 }
 .start-shadow {
@@ -247,6 +251,7 @@ main.container {
   width: 38%;
   height: 51%;
   transform: translate(-33%,-60%);
+  -webkit-transform: translate(-33%,-60%);
   font-size: 1.5rem;
   background-image: url(../images/botw/The_Legend_of_Zelda_Breath_of_the_Wild_logo-outlined_4.png);
   background-size: contain;
@@ -260,6 +265,7 @@ main.container {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
   background-image: url(../images/botw/monk/monk.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -357,6 +363,7 @@ main.container {
   .win-container {
     width: 74%;
     transform: translate(-50%, -30%);
+    -webkit-transform: translate(-50%, -30%);
   }
   .monk {
     height: 58%;
@@ -364,6 +371,7 @@ main.container {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
   }
   .try-again {
     position: relative;
@@ -410,6 +418,7 @@ main.container {
     top: 0;
     left: 0;
     transform: translate(65%, 20%);
+    -webkit-transform: translate(65%, 20%);
     width: 51%;
     height: 70%;
   }
@@ -478,6 +487,7 @@ main.container {
   .win-container {
     width: 84%;
     transform: translate(-50%, -41%);
+    -webkit-transform: translate(-50%, -41%);
   }
   .try-again {
     font-size: 1.2rem;
