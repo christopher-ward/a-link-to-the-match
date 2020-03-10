@@ -137,7 +137,6 @@ main.container {
  /* Card Animations */
 /*******************/
 .card-selected {
-  -webkit-animation: glow 1.5s infinite;
   animation: glow 1.5s infinite;
   cursor: default;
 }
