@@ -65,12 +65,17 @@ main.container {
   position: relative;
   margin: 0.25%;
   width: 16%;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  -webkit-transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1);
   transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1);
   cursor: pointer;
 }
 .card:hover {
   box-shadow: rgb(255, 255, 0) 1px 1px 10px 3px;
+}
+.no-hover:hover {
+  box-shadow: unset;
 }
 .after-round:hover {
   box-shadow: rgb(2, 193, 212) 1px 1px 10px 3px;
@@ -133,6 +138,7 @@ main.container {
 /*******************/
 .card-selected {
   animation: glow 1.5s infinite;
+  cursor: default;
 }
 @keyframes glow {
   0% {box-shadow: 0px 0px 20px 2px rgb(252, 255, 0);}
@@ -146,11 +152,13 @@ main.container {
   border-radius: 10px;
 }
 .back, .front {
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 3px;
 }
 .flipped {
   transform: rotateY(180deg);
+  z-index: 1;
 }
 /* Card match */
 .matched-transition {
@@ -251,10 +259,8 @@ main.container {
 }
 .monk {
   position: absolute;
-  /* height: 52%; */
   min-height: 450px;
   min-width: 365px;
-  /* width: 23%; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -264,9 +270,10 @@ main.container {
 }
 .try-again {
   position: absolute;
-  left: 28%;
-  top: 73px;
-  width: fit-content;
+  left: 36%;
+  top: 4%;
+  width: 43%;
+  text-align: center;
   font-size: 1.8rem;
   color: #02c1d4;
   background-color: rgba(41, 64, 59, 0.9);
@@ -280,6 +287,11 @@ main.container {
   display: none;
 }
 
+@media (hover: none) {
+   .card:hover {
+      box-shadow: unset;
+   }
+}
 @media only screen and (max-width: 1150px) {
   body {
     display: flex;
@@ -316,11 +328,9 @@ main.container {
     color: #e5ac1b;
     margin: 0 1% 5px;
     padding: 0 1%;
-    /* height: 66%; */
   }
   aside .stats.mobile {
     display: flex;
-    /* margin-bottom: 5px; */
     font-size: 1.85rem;
   }
   aside .stats-head, aside .stats span {
@@ -350,7 +360,7 @@ main.container {
   }
   .win-container {
     width: 74%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -30%);
   }
   .monk {
     height: 58%;
@@ -361,28 +371,66 @@ main.container {
   }
   .try-again {
     position: relative;
-    top: 8%;
-    left: 26%;
-    width: 43%;
+    top: 1%;
+    left: 37%;
+    width: 29%;
     text-align: center;
   }
 }
-@media only screen and (max-height: 1150px) and (orientation: landscape) {
-  /* aside {
-    width: 450px;
-  } */
+@media only screen and (max-width: 950px) {
+  .try-again {
+    top: 7%;
+    left: 31%;
+    width: 43%;
+  }
+}
+@media only screen and (max-width: 850px) and (max-height: 415px) {
+  .game-area {
+    flex-direction: row;
+  }
+  aside {
+    min-width: unset;
+    width: 201px;
+    height: 272px;
+    background: url(../images/botw/slate/vertical-slate.jpg)
+      center/100%
+      rgba(59, 151, 162, 0.4);
+    margin: 0;
+  }
+  aside h2.stats-head {
+    font-size: 1.5rem;
+  }
+  aside .stats.mobile {
+    height: 32px;
+    font-size: 1.155rem;
+    margin: 7% 0;
+  }
+  .start-reveal {
+    font-size: 1.5rem;
+    height: 45%;
+    background-size: 100%;
+  }
   .win-container {
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    transform: translate(65%, 20%);
+    width: 51%;
+    height: 70%;
   }
   .try-again {
-    left: 0;
+    font-size: 1rem;
+    width: 33%;
+    left: 35%;
+    top: 3%;
+  }
+}
+
+@media only screen and (max-width: 615px) {
+  .try-again {
     width: 45%;
   }
 }
 @media only screen and (max-width: 500px) {
-  body {
-    /* background-size: 100vh; */
-  }
   .mobile-container {
     display: flex;
     margin: 7px 0px 3px;
@@ -437,42 +485,6 @@ main.container {
   }
   .try-again {
     font-size: 1.2rem;
-  }
-}
-@media only screen and (max-height: 500px) and (orientation: landscape) {
-  .game-area {
-    flex-direction: row;
-  }
-  aside {
-    min-width: unset;
-    width: 201px;
-    height: 272px;
-    background: url(../images/botw/slate/vertical-slate.jpg)
-      center/100%
-      rgba(59, 151, 162, 0.4);
-    margin: 0;
-  }
-  aside h2.stats-head {
-    font-size: 1.5rem;
-  }
-  /* .mobile-container {
-    width: 50%;
-  } */
-  aside .stats.mobile {
-    height: 32px;
-    font-size: 1.155rem;
-    margin: 7% 0;
-  }
-  .start-reveal {
-    font-size: 1.5rem;
-    height: 45%;
-    background-size: 100%;
-  }
-  .win-container {
-    width: 50%;
-  }
-  .try-again {
-    font-size: 1rem;
   }
 }
 @media only screen and (max-width: 350px) {
