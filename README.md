@@ -20,3 +20,9 @@ Link: <https://match.wardofcode.com/>
 ## Preview
 ![Playing_A_Link_to_the_Match](assets/playing_memory_match.gif)
 ![Reshuffling_A_Link_to_the_Match](assets/resetting_and_reshuffling.gif)
+
+## Upcoming Features
+- Player can collect rupees from rupee cards
+  - Randomized Rupees
+- Player can use the rupees collected to buy "power-ups"
+- Players with high numbers of attempts will have matching cards occasionally slightly grow
