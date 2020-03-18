@@ -19,7 +19,7 @@ Link: <https://match.wardofcode.com/>
 
 ## Preview
 ![Playing_A_Link_to_the_Match](assets/playing_memory_match.gif)
-![Reshuffling_A_Link_to_the_Match](assets/resetting_and_reshuffling.gif)
+![Mobile_Responsiveness](assets/mobile_responsive.gif)
 
 ## Upcoming Features
 - Player can collect rupees from rupee cards
