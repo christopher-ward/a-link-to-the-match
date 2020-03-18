@@ -158,7 +158,6 @@ main.container {
 }
 .flipped {
   transform: rotateY(180deg);
-  z-index: 1;
 }
 /* Card match */
 .matched-transition {
