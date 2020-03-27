@@ -158,6 +158,7 @@ main.container {
   border-radius: 3px;
 }
 .flipped {
+  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 /* Card match */
