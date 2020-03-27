@@ -137,7 +137,6 @@ main.container {
  /* Card Animations */
 /*******************/
 .card-selected {
-  -webkit-animation: glow 1.5s infinite;
   animation: glow 1.5s infinite;
   cursor: default;
 }
@@ -149,7 +148,6 @@ main.container {
 /* Card flip */
 .front {
   background-color: #1b3f3f;
-  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   border-radius: 10px;
 }
@@ -159,7 +157,6 @@ main.container {
   border-radius: 3px;
 }
 .flipped {
-  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 /* Card match */
