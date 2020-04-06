@@ -26,3 +26,4 @@ Link: <https://match.wardofcode.com/>
   - Randomized Rupees
 - Player can use the rupees collected to buy "power-ups"
 - Players with high numbers of attempts will have matching cards occasionally slightly grow
+- Additional Levels
