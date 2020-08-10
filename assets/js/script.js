@@ -143,8 +143,12 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
     let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
     $startDiv
       .append(
-        $("<p>").addClass(" anim-typewriter border-right-type-none type-line").text("If you see this, we are saved."),
-        $("<p>").addClass(" anim-typewriter-2 border-right-type-none type-line").text("For Warrior Debra is born!")
+        $("<p>")
+          .addClass(" anim-typewriter border-right-type-none type-line")
+          .text("If you see this, we are saved..."),
+        $("<p>")
+          .addClass(" anim-typewriter-2 border-right-type-none type-line")
+          .text("For Warrior Debra is born!")
       );
     $main.append($monkContainer, $startDiv);
   }
@@ -152,8 +156,12 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
     let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
     $startDiv
       .append(
-        $("<p>").addClass(" anim-typewriter border-right-type-none type-line").text("In the name of Goddess Hylia"),
-        $("<p>").addClass(" anim-typewriter-2 border-right-type-none type-line").text("I offer you this trial.")
+        $("<p>")
+          .addClass(" anim-typewriter border-right-type-none type-line")
+          .text("In the name of Goddess Hylia"),
+        $("<p>")
+          .addClass(" anim-typewriter-2 border-right-type-none type-line")
+          .text("I offer you this trial.")
       );
     $main.append($monkContainer, $startDiv);
   }
