@@ -81,7 +81,6 @@ const startDivClick = () => {
   $(".card").removeClass("hidden no-hover");
   $(".card").addClass("flipped");
   $("#startDiv").addClass("hidden");
-  // $("#bMessageDiv").addClass("hidden");
   $(".start-shadow").removeClass("hidden");
   setTimeout(() => {
     $(".card").removeClass("flipped");
