@@ -123,7 +123,7 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   let currDate = new Date();
   let currMonth = currDate.getMonth()+1;
   let currDay = currDate.getDate();
-  if (currMonth === 8 && currDay === 10) {
+  if (currMonth === 8 && currDay === 11) {
     var message = 1;
   }
   let $main = $("main.container");
