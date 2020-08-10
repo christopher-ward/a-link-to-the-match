@@ -94,6 +94,23 @@ const startDivClick = () => {
 
 const winConditionModal = () => {
   $("#winDiv").removeClass("hidden");
+  // Check the stat conditions and present congratulatory message for the winner
+  // Also add a Birthday message for Mom
+  // Maybe create a message that will repeat every Aug 11
+  // Tangent Note:
+  // This makes me think of a separate project idea.
+  // Build simple page that will display a daily message (The positivity calendar that Mom really likes)
+  // Make white background and the message centered
+  // Look to see if can find those same messages and/or find a different, but similarly styled, source
+  // Maybe create a series of custom messages for her to see every day.
+  // I think the custom messages really is the way to go.
+  // POST MVP - Have different types of content every day.
+  // Can start off with first few months and update later
+  // Maybe could have different scenery for different seasons
+  // Could have tranquil music play in the background
+  // Can change the music
+  // Maybe reach out to Andy for opinion
+  // Also checkout what people are working on
   setTimeout(() => {
     $("#winDiv").addClass("fade-in in");
   }, 100)
@@ -103,6 +120,12 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   let cardArray = [...cardFaceArray];
   let randCardFaceIndex = null;
   let randCardFace = null;
+  let currDate = new Date();
+  let currMonth = currDate.getMonth()+1;
+  let currDay = currDate.getDate();
+  if (currMonth === 8 && currDay === 10) {
+    var message = 1;
+  }
   let $main = $("main.container");
   $main.html("");
   while (cardArray.length > 0) {
@@ -116,7 +139,16 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
     $main.append($divCardElem);
   }
   let $monkContainer = $("<div>").attr('id', 'monkContainer').addClass("monk hidden see-through");
-  if (first) {
+  if (first && message) {
+    let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
+    $startDiv
+      .append(
+        $("<p>").addClass(" anim-typewriter border-right-type-none type-line").text("If you see this, we are saved."),
+        $("<p>").addClass(" anim-typewriter-2 border-right-type-none type-line").text("For Warrior Debra is born!")
+      );
+    $main.append($monkContainer, $startDiv);
+  }
+  else if (first) {
     let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
     $startDiv
       .append(
