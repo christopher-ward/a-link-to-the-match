@@ -103,6 +103,12 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   let cardArray = [...cardFaceArray];
   let randCardFaceIndex = null;
   let randCardFace = null;
+  let currDate = new Date();
+  let currMonth = currDate.getMonth()+1;
+  let currDay = currDate.getDate();
+  if (currMonth === 8 && currDay === 11) {
+    var message = 1;
+  }
   let $main = $("main.container");
   $main.html("");
   while (cardArray.length > 0) {
@@ -116,12 +122,29 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
     $main.append($divCardElem);
   }
   let $monkContainer = $("<div>").attr('id', 'monkContainer').addClass("monk hidden see-through");
-  if (first) {
+  if (first && message) {
     let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
     $startDiv
       .append(
-        $("<p>").addClass(" anim-typewriter border-right-type-none type-line").text("In the name of Goddess Hylia"),
-        $("<p>").addClass(" anim-typewriter-2 border-right-type-none type-line").text("I offer you this trial.")
+        $("<p>")
+          .addClass(" anim-typewriter border-right-type-none type-line")
+          .text("If you see this, we are saved..."),
+        $("<p>")
+          .addClass(" anim-typewriter-2 border-right-type-none type-line")
+          .text("For Warrior Debra is born!")
+      );
+    $main.append($monkContainer, $startDiv);
+  }
+  else if (first) {
+    let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
+    $startDiv
+      .append(
+        $("<p>")
+          .addClass(" anim-typewriter border-right-type-none type-line")
+          .text("In the name of Goddess Hylia"),
+        $("<p>")
+          .addClass(" anim-typewriter-2 border-right-type-none type-line")
+          .text("I offer you this trial.")
       );
     $main.append($monkContainer, $startDiv);
   }
