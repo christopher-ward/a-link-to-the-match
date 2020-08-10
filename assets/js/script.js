@@ -81,6 +81,7 @@ const startDivClick = () => {
   $(".card").removeClass("hidden no-hover");
   $(".card").addClass("flipped");
   $("#startDiv").addClass("hidden");
+  // $("#bMessageDiv").addClass("hidden");
   $(".start-shadow").removeClass("hidden");
   setTimeout(() => {
     $(".card").removeClass("flipped");
@@ -106,7 +107,8 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   let currDate = new Date();
   let currMonth = currDate.getMonth()+1;
   let currDay = currDate.getDate();
-  if (currMonth === 8 && currDay === 11) {
+  //change back to currDay === 11 before deploy
+  if (currMonth === 8 && currDay === 10) {
     var message = 1;
   }
   let $main = $("main.container");
@@ -123,8 +125,8 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   }
   let $monkContainer = $("<div>").attr('id', 'monkContainer').addClass("monk hidden see-through");
   if (first && message) {
-    let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
-    $startDiv
+    let $bMessageDiv = $("<div>").attr('id', 'bMessageDiv').addClass("start-reveal");
+    $bMessageDiv
       .append(
         $("<p>")
           .addClass(" anim-typewriter border-right-type-none type-line")
@@ -133,7 +135,22 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
           .addClass(" anim-typewriter-2 border-right-type-none type-line")
           .text("For Warrior Debra is born!")
       );
-    $main.append($monkContainer, $startDiv);
+    $main.append($monkContainer, $bMessageDiv);
+    $("#bMessageDiv").on("click", () => {
+      let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
+      $startDiv
+        .append(
+          $("<p>")
+            .addClass(" anim-typewriter border-right-type-none type-line")
+            .text("In the name of Goddess Hylia"),
+          $("<p>")
+            .addClass(" anim-typewriter-2 border-right-type-none type-line")
+            .text("I offer you this trial.")
+        );
+      $main.append($startDiv);
+      $("#bMessageDiv").remove();
+      $("#startDiv").on("click", startDivClick);
+    });
   }
   else if (first) {
     let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
