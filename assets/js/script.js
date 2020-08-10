@@ -94,23 +94,6 @@ const startDivClick = () => {
 
 const winConditionModal = () => {
   $("#winDiv").removeClass("hidden");
-  // Check the stat conditions and present congratulatory message for the winner
-  // Also add a Birthday message for Mom
-  // Maybe create a message that will repeat every Aug 11
-  // Tangent Note:
-  // This makes me think of a separate project idea.
-  // Build simple page that will display a daily message (The positivity calendar that Mom really likes)
-  // Make white background and the message centered
-  // Look to see if can find those same messages and/or find a different, but similarly styled, source
-  // Maybe create a series of custom messages for her to see every day.
-  // I think the custom messages really is the way to go.
-  // POST MVP - Have different types of content every day.
-  // Can start off with first few months and update later
-  // Maybe could have different scenery for different seasons
-  // Could have tranquil music play in the background
-  // Can change the music
-  // Maybe reach out to Andy for opinion
-  // Also checkout what people are working on
   setTimeout(() => {
     $("#winDiv").addClass("fade-in in");
   }, 100)
