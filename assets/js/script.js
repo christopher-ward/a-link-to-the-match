@@ -106,8 +106,7 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   let currDate = new Date();
   let currMonth = currDate.getMonth()+1;
   let currDay = currDate.getDate();
-  //change back to currDay === 11 before deploy
-  if (currMonth === 8 && currDay === 10) {
+  if (currMonth === 8 && currDay === 11) {
     var message = 1;
   }
   let $main = $("main.container");
@@ -135,34 +134,51 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
           .text("For on this day was born...")
       );
     $main.append($bDayMessageDivOne);
-
     $("#bDayMessageDivOne").on("click", () => {
       let $bDayMessageDivTwo = $("<div>").attr('id', 'bDayMessageDivTwo').addClass("start-reveal");
       $bDayMessageDivTwo
         .append(
           $("<p>")
-            .addClass(" anim-typewriter border-right-type-none type-line")
-            .text("The Warrior Princess Debra!!"),
+            .addClass(" anim-typewriter-1 border-right-type-none type-line")
+            .text("A legendary and mighty warrior!"),
           $("<p>")
-            .addClass(" anim-typewriter-4 border-right-type-none type-line")
-            .text("Without her, this realm would be lost")
+            .addClass(" anim-typewriter-5 border-right-type-none type-line")
+            .text("The Warrior known as Debra!")
         );
       $main.append($bDayMessageDivTwo);
       $("#bDayMessageDivOne").remove();
       $("#bDayMessageDivTwo").on("click", () => {
-        let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
-        $startDiv
+        let $bDayMessageDivThree = $("<div>").attr('id', 'bDayMessageDivThree').addClass("start-reveal");
+        $bDayMessageDivThree
           .append(
             $("<p>")
               .addClass(" anim-typewriter border-right-type-none type-line")
-              .text("In the name of Goddess Hylia"),
+              .text("She is Guardian of the Realm"),
             $("<p>")
-              .addClass(" anim-typewriter-2 border-right-type-none type-line")
-              .text("I offer you this trial.")
+              .addClass(" anim-typewriter-5 border-right-type-none type-line")
+              .text("Without her, we would be lost...")
           );
-        $main.append($startDiv);
+        $main.append($bDayMessageDivThree);
         $("#bDayMessageDivTwo").remove();
-        $("#startDiv").on("click", startDivClick);
+        $("#bDayMessageDivThree").on("click", () => {
+          let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
+          $startDiv
+            .append(
+              $("<p>")
+                .addClass(" anim-typewriter border-right-type-none type-line")
+                .text("In the name of Goddess Hylia"),
+              $("<p>")
+                .addClass(" anim-typewriter-3_5 border-right-type-none type-line")
+                .text("On this most Happy Day"),
+              $("<p>")
+                .addClass(" anim-typewriter-6 border-right-type-none type-line")
+                .text("I offer you this trial.")
+            );
+          $main.append($startDiv);
+          $("#bDayMessageDivThree").remove();
+
+          $("#startDiv").on("click", startDivClick);
+        });
       });
     });
 
