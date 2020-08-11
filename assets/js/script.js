@@ -103,6 +103,12 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
   let cardArray = [...cardFaceArray];
   let randCardFaceIndex = null;
   let randCardFace = null;
+  let currDate = new Date();
+  let currMonth = currDate.getMonth()+1;
+  let currDay = currDate.getDate();
+  if (currMonth === 8 && currDay === 11) {
+    var message = 1;
+  }
   let $main = $("main.container");
   $main.html("");
   while (cardArray.length > 0) {
@@ -116,12 +122,78 @@ const dynamicCardGenerator = (cardFaceArray, first) => {
     $main.append($divCardElem);
   }
   let $monkContainer = $("<div>").attr('id', 'monkContainer').addClass("monk hidden see-through");
-  if (first) {
+  if (first && message) {
+    let $bDayMessageDivOne = $("<div>").attr('id', 'bDayMessageDivOne').addClass("start-reveal");
+    $bDayMessageDivOne
+      .append(
+        $("<p>")
+          .addClass(" anim-typewriter border-right-type-none type-line")
+          .text("Today is a day of celebration!"),
+        $("<p>")
+          .addClass(" anim-typewriter-3 border-right-type-none type-line")
+          .text("For on this day was born...")
+      );
+    $main.append($bDayMessageDivOne);
+    $("#bDayMessageDivOne").on("click", () => {
+      let $bDayMessageDivTwo = $("<div>").attr('id', 'bDayMessageDivTwo').addClass("start-reveal");
+      $bDayMessageDivTwo
+        .append(
+          $("<p>")
+            .addClass(" anim-typewriter-1 border-right-type-none type-line")
+            .text("A legendary and mighty warrior!"),
+          $("<p>")
+            .addClass(" anim-typewriter-5 border-right-type-none type-line")
+            .text("The Warrior known as Debra!")
+        );
+      $main.append($bDayMessageDivTwo);
+      $("#bDayMessageDivOne").remove();
+      $("#bDayMessageDivTwo").on("click", () => {
+        let $bDayMessageDivThree = $("<div>").attr('id', 'bDayMessageDivThree').addClass("start-reveal");
+        $bDayMessageDivThree
+          .append(
+            $("<p>")
+              .addClass(" anim-typewriter border-right-type-none type-line")
+              .text("She is Guardian of the Realm"),
+            $("<p>")
+              .addClass(" anim-typewriter-5 border-right-type-none type-line")
+              .text("Without her, we would be lost...")
+          );
+        $main.append($bDayMessageDivThree);
+        $("#bDayMessageDivTwo").remove();
+        $("#bDayMessageDivThree").on("click", () => {
+          let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
+          $startDiv
+            .append(
+              $("<p>")
+                .addClass(" anim-typewriter border-right-type-none type-line")
+                .text("In the name of Goddess Hylia"),
+              $("<p>")
+                .addClass(" anim-typewriter-3_5 border-right-type-none type-line")
+                .text("On this most Happy Day"),
+              $("<p>")
+                .addClass(" anim-typewriter-6 border-right-type-none type-line")
+                .text("I offer you this trial.")
+            );
+          $main.append($startDiv);
+          $("#bDayMessageDivThree").remove();
+
+          $("#startDiv").on("click", startDivClick);
+        });
+      });
+    });
+
+
+  }
+  else if (first) {
     let $startDiv = $("<div>").attr('id', 'startDiv').addClass("start-reveal");
     $startDiv
       .append(
-        $("<p>").addClass(" anim-typewriter border-right-type-none type-line").text("In the name of Goddess Hylia"),
-        $("<p>").addClass(" anim-typewriter-2 border-right-type-none type-line").text("I offer you this trial.")
+        $("<p>")
+          .addClass(" anim-typewriter border-right-type-none type-line")
+          .text("In the name of Goddess Hylia"),
+        $("<p>")
+          .addClass(" anim-typewriter-2 border-right-type-none type-line")
+          .text("I offer you this trial.")
       );
     $main.append($monkContainer, $startDiv);
   }
