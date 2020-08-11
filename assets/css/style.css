@@ -184,9 +184,21 @@ main.container {
   animation: typewriter 4s steps(44) 5s 1 normal both,
              blinkTextCursor 500ms steps(44) 5s 5.5 normal;
 }
+.anim-typewriter-3 {
+  animation: typewriter 4s steps(44) 5s 1 normal both,
+             blinkTextCursor 500ms steps(44) 5s 7.5 normal;
+}
+.anim-typewriter-4 {
+  animation: typewriterTwo 4s steps(44) 5s 1 normal both,
+             blinkTextCursor 500ms steps(44) 5s 7.5 normal;
+}
 @keyframes typewriter {
   from{width: 0;}
   to{width: 14em;}
+}
+@keyframes typewriterTwo {
+  from{width: 0;}
+  to{width: 18em;}
 }
 @keyframes blinkTextCursor {
   from{border-right-color: rgba(255,255,255,.75);}
