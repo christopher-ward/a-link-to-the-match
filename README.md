@@ -28,3 +28,4 @@ Link: <https://match.wardofcode.com/>
 - Players with high numbers of attempts will have matching cards occasionally slightly grow
 - Special Unlocks for low number of attempts in game
 - Additional Levels
+- New Messages
