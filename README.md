@@ -17,7 +17,7 @@ A Link to the Match is a game in which a player attempts to find matching pairs 
 ## Live Demo
 Link: <https://match.wardofcode.com/>
 
-## Preview
+## Preview Gifs
 ![Playing_A_Link_to_the_Match](assets/playing_memory_match.gif)
 ![Mobile_Responsiveness](assets/mobile_responsive.gif)
 
@@ -26,3 +26,6 @@ Link: <https://match.wardofcode.com/>
   - Randomized Rupees
 - Player can use the rupees collected to buy "power-ups"
 - Players with high numbers of attempts will have matching cards occasionally slightly grow
+- Special Unlocks for low number of attempts in game
+- Additional Levels
+- New Messages

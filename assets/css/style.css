@@ -2,7 +2,7 @@ body {
   font-family: 'Spectral', serif;
   height: 100vh;
   margin: 0;
-  background-image: url(../images/botw/the-legend-of-zelda-breath-of-the-wild-wallpaper-hd.jpg);
+  background-image: url(../images/botw/locations/the-legend-of-zelda-breath-of-the-wild-wallpaper-hd.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -410,6 +410,30 @@ main.container {
     left: 31%;
     width: 43%;
   }
+  .black-bokoblin {
+    background-image: url("../images/botw/creatures/mobile/BotW_Black_Bokoblin_Model.png");
+  }
+  .blue-maned-lynel {
+    background-image: url("../images/botw/creatures/mobile/BotW_Blue-Maned_Lynel_Model.png");
+  }
+  .golden-bokoblin {
+    background-image: url("../images/botw/creatures/mobile/BotW_Golden_Bokoblin_Model.png");
+  }
+  .green-rupee {
+    background-image: url("../images/botw/rupees/mobile/green_rupee.png");
+  }
+  .blue-rupee {
+    background-image: url("../images/botw/rupees/mobile/blue_rupee.png");
+  }
+  .red-rupee {
+    background-image: url("../images/botw/rupees/mobile/red_rupee.png");
+  }
+  .purple-rupee {
+    background-image: url("../images/botw/rupees/mobile/purple_rupee.png");
+  }
+  .gold-rupee {
+    background-image: url("../images/botw/rupees/mobile/gold_rupee.png");
+  }
 }
 @media only screen and (max-width: 850px) and (max-height: 415px) {
   .game-area {
@@ -431,6 +455,9 @@ main.container {
     height: 32px;
     font-size: 1.155rem;
     margin: 7% 0;
+  }
+  .black-bokoblin {
+    background-image: url(../images/botw/creatures/mobile/BotW_Black_Bokoblin_Model.png);
   }
   .start-reveal {
     font-size: 1.5rem;
